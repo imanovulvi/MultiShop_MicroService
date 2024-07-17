@@ -1,0 +1,39 @@
+﻿using AutoMapper;
+using MultiShop.Catalog.DTOs.Category;
+using MultiShop.Catalog.DTOs.Image;
+using MultiShop.Catalog.DTOs.Product;
+using MultiShop.Catalog.DTOs.ProductDetails;
+using MultiShop.Catalog.Entitys;
+
+namespace MultiShop.Catalog.Mapping
+{
+    public class GeneralMapping:Profile
+    {
+        public GeneralMapping()
+        {
+            CreateMap(typeof(Product), typeof(CreateProductDTO)).ReverseMap();
+            CreateMap(typeof(Product), typeof(GetByIdProductDTO)).ReverseMap();
+            CreateMap(typeof(Product), typeof(ResultProductDTO)).ReverseMap();
+            CreateMap(typeof(Product), typeof(UpdateProductDTO)).ReverseMap();
+
+
+            CreateMap(typeof(Category), typeof(CreateCategoryDTO)).ReverseMap();
+            CreateMap(typeof(Category), typeof(GetByIdCategoryDTO)).ReverseMap();
+            CreateMap(typeof(Category), typeof(ResultCategoryDTO)).ReverseMap();
+            CreateMap(typeof(Category), typeof(UpdateCategoryDTO)).ReverseMap();
+
+
+            CreateMap(typeof(Image), typeof(CreateImageDTO)).ReverseMap();
+            CreateMap(typeof(Image), typeof(GetByIdImageDTO)).ReverseMap();
+            CreateMap(typeof(Image), typeof(ResultImageDTO)).ReverseMap();
+            CreateMap(typeof(Image), typeof(UpdateImageDTO)).ReverseMap();
+
+
+            CreateMap(typeof(ProductDetails), typeof(CreateProductDetailsDTO)).ReverseMap();
+            CreateMap(typeof(ProductDetails), typeof(GetByIdProductDetailsDTO)).ReverseMap();
+            CreateMap(typeof(ProductDetails), typeof(ResultProductDetailsDTO)).ReverseMap();
+            CreateMap(typeof(ProductDetails), typeof(UpdateProductDetailsDTO)).ReverseMap();
+
+        }
+    }
+}
