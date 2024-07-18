@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MultiShop.Discount.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mg1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
