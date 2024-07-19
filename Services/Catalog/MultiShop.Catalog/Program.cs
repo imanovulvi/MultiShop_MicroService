@@ -1,6 +1,7 @@
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MultiShop.Catalog.Services.Category;
 using MultiShop.Catalog.Services.Image;
 using MultiShop.Catalog.Services.Product;
@@ -23,6 +24,18 @@ namespace MultiShop.Catalog
             builder.Services.AddScoped(typeof(IImageService), typeof(ImageService));
             builder.Services.AddScoped(typeof(IProductDetailsService), typeof(ProductDetailsService));
 
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configure => configure.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidateAudience = true,
+                ValidateIssuer = true,
+                ValidAudience = builder.Configuration["JWT:audience"],
+                ValidIssuer = builder.Configuration["JWT:issuer"],
+                IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:key"])),
+                LifetimeValidator = (DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters) => expires != null ? expires > DateTime.UtcNow : false
+            }
+);
+
             builder.Services.Configure<DataBaseSettings>(builder.Configuration.GetSection("MongoDBSettings"));
 
             builder.Services.AddScoped<IDataBaseSettings>(sp=>sp.GetRequiredService<IOptions<DataBaseSettings>>().Value);
@@ -42,7 +55,7 @@ namespace MultiShop.Catalog
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

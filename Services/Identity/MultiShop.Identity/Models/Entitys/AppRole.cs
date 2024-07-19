@@ -4,6 +4,5 @@ namespace MultiShop.Identity.Models.Entitys
 {
     public class AppRole:IdentityRole<Guid>
     {
-
     }
 }
