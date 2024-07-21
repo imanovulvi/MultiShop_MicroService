@@ -1,0 +1,12 @@
+﻿namespace MultiShop.Basket.WebAPI.DTOs
+{
+    public class BasketTotalDTO
+    {
+        public string UserId { get; set; }
+        public int DuscountCode { get; set; }
+        public int Duscount { get; set; }
+
+        public List<BasketDTO> Baskets { get; set; }
+        public decimal TotalPrice{get=> Baskets.Sum(x => x.Price * x.Quantity);}
+    }
+}
