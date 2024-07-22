@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            @await Component.InvokeAsync("_FilterByPricePartial")
+            <!-- Price End -->
+
+            <!-- Color Start -->
+            @await Component.InvokeAsync("_FilterByColorPartial")
+            <!-- Color End -->
+
+            <!-- Size Start -->
+            @await Component.InvokeAsync("_FilterBySizePartial")
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+        <!-- Shop Product Start -->
+        @await Component.InvokeAsync("_ShopProductPartial")
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+

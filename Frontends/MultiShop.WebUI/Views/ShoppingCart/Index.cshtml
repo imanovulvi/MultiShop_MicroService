@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        @await Component.InvokeAsync("_ShoppingCartPartial")
+        @await Component.InvokeAsync("_ShoppingCartDiscountPartial")
+    </div>
+</div>
+
