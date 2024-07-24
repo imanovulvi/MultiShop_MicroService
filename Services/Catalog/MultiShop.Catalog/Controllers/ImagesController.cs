@@ -38,17 +38,17 @@ namespace MultiShop.Catalog.Controllers
             await image.CreateAsync(create);
             return Ok("Elave edildi");
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update(UpdateImageDTO update)
         {
             await image.UpdateAsync(update);
             return Ok("Yenilendi");
         }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)
         {
-            await image.Delete(id);
+            await image.DeleteAsync(id);
             return Ok("silindi");
         }
 

@@ -3,9 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MultiShop.Catalog.Services.Category;
+using MultiShop.Catalog.Services.FeatureSlider;
 using MultiShop.Catalog.Services.Image;
 using MultiShop.Catalog.Services.Product;
 using MultiShop.Catalog.Services.ProductDetails;
+using MultiShop.Catalog.Services.SpecialOffer;
 using MultiShop.Catalog.Settings;
 using System.Reflection;
 
@@ -23,6 +25,8 @@ namespace MultiShop.Catalog
             builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
             builder.Services.AddScoped(typeof(IImageService), typeof(ImageService));
             builder.Services.AddScoped(typeof(IProductDetailsService), typeof(ProductDetailsService));
+            builder.Services.AddScoped(typeof(IFeatureSliderService), typeof(FeatureSliderService));
+            builder.Services.AddScoped(typeof(ISpecialOfferService), typeof(SpecialOfferService));
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configure => configure.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {

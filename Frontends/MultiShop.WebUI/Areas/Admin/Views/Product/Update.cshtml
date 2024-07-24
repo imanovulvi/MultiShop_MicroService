@@ -1,0 +1,46 @@
+﻿
+@model ResultProductDTO
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="chart-box">
+        <h4>Product Table</h4>
+        <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+        <div class="bs-example" data-example-id="bordered-table">
+            <form method="post" action="/admin/Product/Update">
+                <input type="hidden" asp-for="Id" />
+                <p>Name</p>
+                <input type="text" name="Name" value="@Model.Name" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2"/>
+                <br />
+                <p>Description</p>
+                <input type="text" asp-for="Description" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2">
+                <br />
+                <p>Price</p>
+                <input type="number" asp-for="Price" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2">
+                <br />
+                <p>Image</p>
+                <input type="text" asp-for="ImageUrl" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2">
+                <br />
+                <p>Categorys</p>
+                <select asp-for="CategoryId" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2">
+                    <option>Select</option>
+                    @foreach (var item in ViewBag.categorys)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <br />
+                <input type="submit" value="Update" class="btn btn-secondary" />
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+

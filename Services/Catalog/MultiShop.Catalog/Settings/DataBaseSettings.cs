@@ -8,5 +8,8 @@
         public string ProductCollectionsName { get; set; }
         public string ImageCollectionsName { get; set; }
         public string ProductDetailsCollectionsName { get; set; }
+        public string FeatureSlidersCollectionsName { get; set; }
+        public string SpecialOfferCollectionsName { get; set; }
+
     }
 }

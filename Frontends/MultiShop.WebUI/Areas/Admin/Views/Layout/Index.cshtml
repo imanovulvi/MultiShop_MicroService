@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ovio -  Bootstrap Based Responsive Dashboard &amp; Admin Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/bootstrap/css/bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Template style -->
+    <link rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/dist/css/style.css">
+    <link rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/tables/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/tables/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/dist/weather/weather-icons.min.css">
+    <link type="text/css" rel="stylesheet" href="~/MainDownload-OvioAdmin-html5-template/html/dist/weather/weather-icons-wind.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="sidebar-mini">
+    <div class="wrapper">
+        <!-- Main Header -->
+
+        @await Component.InvokeAsync("_LayoutHeaderPartial")
+
+        <!-- Left side column. contains the logo and sidebar -->
+        @await Component.InvokeAsync("_LayoutLeftSideBarPartial")
+    
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>@ViewBag.v0</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-home"></i> @ViewBag.v1</a></li>
+                    <li class="active"><i class="fa fa-envelope-o"></i> @ViewBag.v2</li>
+                    <li class="active"><i class="fa fa-bars"></i> @ViewBag.v3</li>
+                </ol>
+            </section>
+           
+            <!-- Main content -->
+            <section class="content container-fluid">
+                <div class="row">
+                    @RenderBody()
+           
+
+                </div>
+            </section>
+            <!-- content -->
+        </div>
+        <!-- content-wrapper -->
+        <!-- Main Footer -->
+        @await Component.InvokeAsync("_LayoutFooterPartial")
+    </div>
+    <!-- wrapper -->
+    <!-- jQuery -->
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/jquery.min.js"></script>
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/ovio.js"></script>
+</body>
+</html>

@@ -9,7 +9,7 @@ namespace MultiShop.Catalog.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+ 
     public class CategorysController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -40,17 +40,17 @@ namespace MultiShop.Catalog.Controllers
           await  category.CreateAsync(create);
             return Ok("Elave edildi");
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update(UpdateCategoryDTO update)
         {
             await category.UpdateAsync(update);
             return Ok("Yenilendi");
         }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery]string id)
         {
-            await category.Delete(id);
+            await category.DeleteAsync(id);
             return Ok("silindi");
         }
     }

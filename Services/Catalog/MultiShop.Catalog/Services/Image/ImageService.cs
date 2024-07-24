@@ -24,7 +24,7 @@ namespace MultiShop.Catalog.Services.Image
             await categories.InsertOneAsync(mapper.Map<ET.Image>(ImageDTO));
         }
 
-        public async Task Delete(string id)
+        public async Task DeleteAsync(string id)
         {
             await categories.DeleteOneAsync(x => x.Id == id);
         }
