@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using MultiShop.Catalog.Services.About;
+using MultiShop.Catalog.Services.Brand;
 using MultiShop.Catalog.Services.Category;
+using MultiShop.Catalog.Services.DiscountOffer;
+using MultiShop.Catalog.Services.Featured;
 using MultiShop.Catalog.Services.FeatureSlider;
 using MultiShop.Catalog.Services.Image;
 using MultiShop.Catalog.Services.Product;
@@ -26,7 +30,12 @@ namespace MultiShop.Catalog
             builder.Services.AddScoped(typeof(IImageService), typeof(ImageService));
             builder.Services.AddScoped(typeof(IProductDetailsService), typeof(ProductDetailsService));
             builder.Services.AddScoped(typeof(IFeatureSliderService), typeof(FeatureSliderService));
+
+            builder.Services.AddScoped(typeof(IFeaturedService), typeof(FeaturedService));
             builder.Services.AddScoped(typeof(ISpecialOfferService), typeof(SpecialOfferService));
+            builder.Services.AddScoped(typeof(IDiscountOfferService), typeof(DiscountOfferService));
+            builder.Services.AddScoped(typeof(IBrandService), typeof(BrandService));
+            builder.Services.AddScoped(typeof(IAboutService), typeof(AboutService));
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configure => configure.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {

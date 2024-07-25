@@ -15,6 +15,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>ImageUrl</th>
                         <th>Products</th>
                         <th>Update</th>
                         <th>Delete</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <th scope="row">@(++count)</th>
                             <td>@item.Name</td>
+                            <td>@item.ImageUrl</td>
                             <td><a href="#" class="btn btn-info">Products</a></td>
                             <td><a href="/admin/Category/Update?id=@item.Id" class="btn btn-primary">Update</a></td>
                             <td><a href="/admin/Category/Delete?id=@item.Id" class="btn btn-danger">Delete</a></td>

@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MultiShop.Catalog.DTOs.Product;
-using MultiShop.Catalog.Services.Product;
+using MultiShop.Catalog.DTOs.Brand;
+using MultiShop.Catalog.Services.Brand;
 
 namespace MultiShop.Catalog.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class BrandController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly IProductService products;
+        private readonly IBrandService brand;
 
-        public ProductsController(IMapper mapper, IProductService Product)
+        public BrandController(IMapper mapper, IBrandService brand)
         {
             this.mapper = mapper;
-            this.products = Product;
+            this.brand = brand;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
 
-            return Ok(await products.GetAllAsync());
+            return Ok(await brand.GetAllAsync());
         }
 
 
@@ -30,25 +30,25 @@ namespace MultiShop.Catalog.Controllers
         public async Task<IActionResult> GetById([FromQuery] string id)
         {
 
-            return Ok(await products.GetByIdAsync(id));
+            return Ok(await brand.GetByIdAsync(id));
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProductDTO create)
+        public async Task<IActionResult> Create(CreateBrandDTO create)
         {
-            await products.CreateAsync(create);
+            await brand.CreateAsync(create);
             return Ok("Elave edildi");
         }
         [HttpPut]
-        public async Task<IActionResult> Update(UpdateProductDTO update)
+        public async Task<IActionResult> Update(UpdateBrandDTO update)
         {
-            await products.UpdateAsync(update);
+            await brand.UpdateAsync(update);
             return Ok("Yenilendi");
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)
         {
-            await products.DeleteAsync(id);
+            await brand.DeleteAsync(id);
             return Ok("silindi");
         }
     }

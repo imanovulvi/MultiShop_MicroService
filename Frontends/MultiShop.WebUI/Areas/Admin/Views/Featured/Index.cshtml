@@ -1,0 +1,50 @@
+﻿@model List<ResultFeaturedDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="col-md-12">
+    <div class="chart-box">
+        <h4>Category Table</h4>
+        <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+        <div class="bs-example" data-example-id="bordered-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Icon</th>
+                       
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@(++count)</th>
+                            <td>@item.Title</td>
+                            <td>@item.Icon</td>
+                 
+
+                            <td><a href="/admin/Featured/Update?id=@item.Id" class="btn btn-primary">Update</a></td>
+                            <td><a href="/admin/Featured/Delete?id=@item.Id" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    }
+
+
+
+
+
+
+                </tbody>
+            </table>
+            <a href="/admin/Featured/Create" class="btn btn-primary">Create</a>
+        </div>
+    </div>
+</div>
+
+

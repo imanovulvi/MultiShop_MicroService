@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+}
+<div class="col-md-12">
+    <div class="chart-box">
+        <h4>Category Table</h4>
+        <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+        <div class="bs-example" data-example-id="bordered-table">
+            <form method="post" action="/admin/Featured/Create">
+                <p>Title</p>
+                <input type="text" name="Title" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2" />
+                <br />
+                <p>Icon</p>
+                <input type="text" name="Icon" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2" />
+                
+                <br />
+                <input type="submit" value="Create" class="btn btn-primary" />
+
+            </form>
+
+        </div>
+    </div>
+</div>
+

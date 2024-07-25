@@ -10,12 +10,12 @@ namespace MultiShop.Catalog.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
  
-    public class CategorysController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly ICategoryService category;
 
-        public CategorysController(IMapper mapper, ICategoryService category)
+        public CategoryController(IMapper mapper, ICategoryService category)
         {
             this.mapper = mapper;
             this.category = category;

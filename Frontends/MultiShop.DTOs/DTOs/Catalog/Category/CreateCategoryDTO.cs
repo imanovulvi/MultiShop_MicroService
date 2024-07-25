@@ -9,5 +9,6 @@ namespace MultiShop.DTOs.DTOs.Catalog.Category
     public class CreateCategoryDTO
     {
         public string Name { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

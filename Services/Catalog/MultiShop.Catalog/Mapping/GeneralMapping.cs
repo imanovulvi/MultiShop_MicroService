@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using MultiShop.Catalog.DTOs.About;
+using MultiShop.Catalog.DTOs.Brand;
 using MultiShop.Catalog.DTOs.Category;
+using MultiShop.Catalog.DTOs.DiscountOffer;
+using MultiShop.Catalog.DTOs.Featured;
 using MultiShop.Catalog.DTOs.FeatureSlider;
 using MultiShop.Catalog.DTOs.Image;
 using MultiShop.Catalog.DTOs.Product;
@@ -46,6 +50,29 @@ namespace MultiShop.Catalog.Mapping
             CreateMap(typeof(SpecialOffer), typeof(GetByIdSpecialOfferDTO)).ReverseMap();
             CreateMap(typeof(SpecialOffer), typeof(ResultSpecialOfferDTO)).ReverseMap();
             CreateMap(typeof(SpecialOffer), typeof(UpdateSpecialOfferDTO)).ReverseMap();
+
+            CreateMap(typeof(Featured), typeof(CreateFeaturedDTO)).ReverseMap();
+            CreateMap(typeof(Featured), typeof(GetByIdFeaturedDTO)).ReverseMap();
+            CreateMap(typeof(Featured), typeof(ResultFeaturedDTO)).ReverseMap();
+            CreateMap(typeof(Featured), typeof(UpdateFeaturedDTO)).ReverseMap();
+
+
+            CreateMap(typeof(DiscountOffer), typeof(CreateDiscountOfferDTO)).ReverseMap();
+            CreateMap(typeof(DiscountOffer), typeof(GetByIdDiscountOfferDTO)).ReverseMap();
+            CreateMap(typeof(DiscountOffer), typeof(ResultDiscountOfferDTO)).ReverseMap();
+            CreateMap(typeof(DiscountOffer), typeof(UpdateDiscountOfferDTO)).ReverseMap();
+
+
+            CreateMap(typeof(Brand), typeof(CreateBrandDTO)).ReverseMap();
+            CreateMap(typeof(Brand), typeof(GetByIdBrandDTO)).ReverseMap();
+            CreateMap(typeof(Brand), typeof(ResultBrandDTO)).ReverseMap();
+            CreateMap(typeof(Brand), typeof(UpdateBrandDTO)).ReverseMap();
+
+
+            CreateMap(typeof(About), typeof(CreateAboutDTO)).ReverseMap();
+            CreateMap(typeof(About), typeof(GetByIdAboutDTO)).ReverseMap();
+            CreateMap(typeof(About), typeof(ResultAboutDTO)).ReverseMap();
+            CreateMap(typeof(About), typeof(UpdateAboutDTO)).ReverseMap();
 
         }
     }

@@ -13,7 +13,11 @@
             <form method="post" action="/admin/Category/Update">
                 <input type="hidden" name="Id" value="@Model.Id" />
                 <br />
+                <p>Name</p>
                 <input type="text" name="Name" value="@Model.Name" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2"/>
+                <br />
+                <p>ImageUrl</p>
+                <input type="text" name="ImageUrl" value="@Model.ImageUrl" class="form-control" id="inputSuccess1" aria-describedby="helpBlock2" />
                 <br />
 
                 <input type="submit" value="Update" class="btn btn-primary" />

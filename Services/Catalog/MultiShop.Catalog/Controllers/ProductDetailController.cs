@@ -8,12 +8,12 @@ namespace MultiShop.Catalog.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ProductDetailsController : ControllerBase
+    public class ProductDetailController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IProductDetailsService productDetails;
 
-        public ProductDetailsController(IMapper mapper, IProductDetailsService ProductDetails)
+        public ProductDetailController(IMapper mapper, IProductDetailsService ProductDetails)
         {
             this.mapper = mapper;
             this.productDetails = ProductDetails;

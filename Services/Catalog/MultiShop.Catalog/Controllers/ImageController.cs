@@ -8,12 +8,12 @@ namespace MultiShop.Catalog.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ImagesController : ControllerBase
+    public class ImageController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IImageService image;
 
-        public ImagesController(IMapper mapper, IImageService Image)
+        public ImageController(IMapper mapper, IImageService Image)
         {
             this.mapper = mapper;
             this.image = Image;

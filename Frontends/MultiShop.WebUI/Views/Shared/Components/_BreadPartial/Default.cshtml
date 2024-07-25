@@ -1,0 +1,20 @@
+﻿@model List<ResultBrandDTO>
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                @if (Model is not null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <div class="bg-light p-4">
+                            <img src="@item.ImageUrl" alt="">
+                        </div>
+                    }
+                }
+
+             
+            </div>
+        </div>
+    </div>
+</div>
