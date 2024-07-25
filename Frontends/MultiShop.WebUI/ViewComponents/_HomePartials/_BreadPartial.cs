@@ -2,9 +2,9 @@
 using MultiShop.DTOs.DTOs.Catalog.Brand;
 using Newtonsoft.Json;
 
-namespace MultiShop.WebUI.ViewComponents._LayoutPartials
+namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
-    public class _BreadPartial:ViewComponent
+    public class _BreadPartial : ViewComponent
     {
         string url = "";
 

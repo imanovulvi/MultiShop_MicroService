@@ -2,7 +2,7 @@
 using MultiShop.DTOs.DTOs.Catalog.Product;
 using Newtonsoft.Json;
 
-namespace MultiShop.WebUI.ViewComponents._LayoutPartials
+namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
     public class _FeaturedProductsPartial : ViewComponent
     {
@@ -17,7 +17,7 @@ namespace MultiShop.WebUI.ViewComponents._LayoutPartials
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            
+
             HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
             if (response.IsSuccessStatusCode)
             {

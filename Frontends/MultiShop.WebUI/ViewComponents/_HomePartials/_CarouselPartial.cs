@@ -3,7 +3,7 @@ using MultiShop.DTOs.DTOs.Catalog.FeatureSlider;
 using MultiShop.DTOs.DTOs.Catalog.SpecialOffer;
 using Newtonsoft.Json;
 
-namespace MultiShop.WebUI.ViewComponents._LayoutPartials
+namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
     public class _CarouselPartial : ViewComponent
     {
@@ -22,7 +22,7 @@ namespace MultiShop.WebUI.ViewComponents._LayoutPartials
             HttpResponseMessage responseSpecialOffer = await httpClient.GetAsync(urlSpecialOffer + "/Get");
             if (responseSpecialOffer.IsSuccessStatusCode)
             {
-              ViewBag.specialOffer= JsonConvert.DeserializeObject<List<ResultSpecialOfferDTO>>(await responseSpecialOffer.Content.ReadAsStringAsync());
+                ViewBag.specialOffer = JsonConvert.DeserializeObject<List<ResultSpecialOfferDTO>>(await responseSpecialOffer.Content.ReadAsStringAsync());
 
             }
 
@@ -35,7 +35,7 @@ namespace MultiShop.WebUI.ViewComponents._LayoutPartials
 
             }
             return View();
-       
+
         }
     }
 }

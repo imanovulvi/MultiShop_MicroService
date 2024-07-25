@@ -24,7 +24,7 @@
         <!-- Shop Sidebar End -->
 
         <!-- Shop Product Start -->
-        @await Component.InvokeAsync("_ShopProductPartial")
+        @await Component.InvokeAsync("_ShopProductPartial",ViewBag.id)
         <!-- Shop Product End -->
     </div>
 </div>

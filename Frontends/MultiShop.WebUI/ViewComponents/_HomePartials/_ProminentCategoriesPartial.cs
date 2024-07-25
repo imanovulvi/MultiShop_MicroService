@@ -2,9 +2,9 @@
 using MultiShop.DTOs.DTOs.Catalog.Category;
 using Newtonsoft.Json;
 
-namespace MultiShop.WebUI.ViewComponents._LayoutPartials
+namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
-    public class _ProminentCategoriesPartial:ViewComponent
+    public class _ProminentCategoriesPartial : ViewComponent
     {
         string url = "";
         string urlSpecialOffer = "";
