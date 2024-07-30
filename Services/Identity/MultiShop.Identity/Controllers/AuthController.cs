@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MultiShop.Identity.Models.AppClass;
 using MultiShop.Identity.Models.DTOs.AppUser;
 using MultiShop.Identity.Models.Entitys;
 using MultiShop.Identity.Services.Abstactions;
@@ -23,7 +24,7 @@ namespace MultiShop.Identity.Controllers
             this.tokenService = tokenService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAppUserDTO request) 
+        public async Task<IActionResult> CreateUser(CreateAppUserDTO request) 
         {
            
 
@@ -39,13 +40,13 @@ namespace MultiShop.Identity.Controllers
          
 
            var result=await  userManager.CreateAsync(appUser);
-            
+
             if (result.Succeeded)
             {
 
-                   await userManager.AddToRoleAsync(appUser, request.Role);
-                
-                
+                await userManager.AddToRoleAsync(appUser, request.Role);
+
+
                 return Ok("Qeydiyyat bas catdi");
             }
                 
@@ -65,7 +66,7 @@ namespace MultiShop.Identity.Controllers
                 if (result.PasswordHash==request.Password)
                 {
                     List<Claim> claims = new() {
-                         new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
                     new Claim(ClaimTypes.Email, result.Email),
                     new Claim(ClaimTypes.Name, result.Name),
                     new Claim(ClaimTypes.Surname, result.Surname),
@@ -77,20 +78,17 @@ namespace MultiShop.Identity.Controllers
                     {
                         claims.Add(new Claim(ClaimTypes.Role,item));
                     }
-
-                  
-
-                    var token=tokenService.CreateAccessToken(claims);
+                    Token token =tokenService.CreateAccessToken(claims);
                     return Ok(token);
                 }
                 else
                 {
-                    return Ok("Password ve ya Email sehvlik");
+                    return Ok(new Token());
                 }
             }
             else
             {
-                return Ok("Password ve ya Email sehvlik");
+                return Ok(new Token());
             }
 
 
@@ -99,7 +97,7 @@ namespace MultiShop.Identity.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateRol(string request)
+        public async Task<IActionResult> CreateRole(string request)
         {
 
 

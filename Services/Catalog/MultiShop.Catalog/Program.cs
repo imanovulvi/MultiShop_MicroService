@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using MultiShop.Catalog.Services.About;
 using MultiShop.Catalog.Services.Brand;
 using MultiShop.Catalog.Services.Category;
+using MultiShop.Catalog.Services.Contact;
 using MultiShop.Catalog.Services.DiscountOffer;
 using MultiShop.Catalog.Services.Featured;
 using MultiShop.Catalog.Services.FeatureSlider;
@@ -14,6 +15,7 @@ using MultiShop.Catalog.Services.ProductDetails;
 using MultiShop.Catalog.Services.SpecialOffer;
 using MultiShop.Catalog.Settings;
 using System.Reflection;
+
 
 namespace MultiShop.Catalog
 {
@@ -36,6 +38,8 @@ namespace MultiShop.Catalog
             builder.Services.AddScoped(typeof(IDiscountOfferService), typeof(DiscountOfferService));
             builder.Services.AddScoped(typeof(IBrandService), typeof(BrandService));
             builder.Services.AddScoped(typeof(IAboutService), typeof(AboutService));
+            builder.Services.AddScoped(typeof(IContactService), typeof(ContactService));
+       
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configure => configure.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {
@@ -66,7 +70,7 @@ namespace MultiShop.Catalog
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using MultiShop.DTOs.DTOs.Catalog.Category;
+using MultiShop.DTOs.DTOs.Catalog.Image;
 using MultiShop.DTOs.DTOs.Catalog.Product;
+using MultiShop.DTOs.DTOs.Catalog.ProductDetails;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
@@ -13,6 +17,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     {
         private readonly string url;
         private readonly string urlCategory;
+        private readonly string urlImage;
+        private readonly string urlProductDetail;
         private readonly HttpClient httpClient;
 
         public ProductController(IConfiguration configuration, IHttpClientFactory httpClient)
@@ -20,6 +26,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
             url = configuration["ServiceUrl:Catalog:Product"];
             urlCategory = configuration["ServiceUrl:Catalog:Category"];
+            urlImage = configuration["ServiceUrl:Catalog:Image"];
+            urlProductDetail = configuration["ServiceUrl:Catalog:ProductDetail"];
             this.httpClient = httpClient.CreateClient();
         }
 
@@ -110,6 +118,83 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(update), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return Redirect("/Admin/Product/Index");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> GetImages(string id)
+        {
+
+
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddImages(IFormFileCollection formFiles, string productId)
+        {
+            var content = new MultipartFormDataContent();
+            foreach (var file in formFiles)
+            {
+
+                var fileStream = file.OpenReadStream();
+
+                var fileContent = new StreamContent(fileStream);
+                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+                content.Add(fileContent, "file", file.FileName);
+            }
+
+
+
+
+            var response = await httpClient.PostAsync(urlImage + "/Create?productId=" + productId, content);
+            if (response.IsSuccessStatusCode)
+            {
+                return Redirect("/Admin/Product/Index");
+            }
+
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ProductDetails(string productId)
+        {
+            HttpResponseMessage responseProduct = await httpClient.GetAsync(urlProductDetail + "/GetDetailProductById?productId=" + productId);
+
+            ResultProductDetailsDTO productDTO = null;
+            if (responseProduct.IsSuccessStatusCode)
+            {
+                productDTO = JsonConvert.DeserializeObject<ResultProductDetailsDTO>(await responseProduct.Content.ReadAsStringAsync());
+
+                if (productDTO is null)
+                {
+                    CreateProductDetailsDTO detailsDTO = new CreateProductDetailsDTO
+                    {
+                        ProductId = productId,
+                        Descrtiption = "",
+                        Info = ""
+
+                    };
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(detailsDTO), Encoding.UTF8, "application/json");
+
+
+                    HttpResponseMessage responseCretaeProduct = await httpClient.PostAsync(urlProductDetail + "/Create", stringContent);
+                }
+            }
+            return View(productDTO);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProductDetailsUpdate(UpdateProductDetailsDTO updateDTO)
+        {
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(updateDTO), Encoding.UTF8, "application/json");
+
+
+            HttpResponseMessage response = await httpClient.PutAsync(urlProductDetail + "/Update", stringContent);
             if (response.IsSuccessStatusCode)
             {
                 return Redirect("/Admin/Product/Index");

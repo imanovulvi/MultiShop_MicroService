@@ -2,6 +2,7 @@
 using MultiShop.Catalog.DTOs.About;
 using MultiShop.Catalog.DTOs.Brand;
 using MultiShop.Catalog.DTOs.Category;
+using MultiShop.Catalog.DTOs.Contact;
 using MultiShop.Catalog.DTOs.DiscountOffer;
 using MultiShop.Catalog.DTOs.Featured;
 using MultiShop.Catalog.DTOs.FeatureSlider;
@@ -73,6 +74,13 @@ namespace MultiShop.Catalog.Mapping
             CreateMap(typeof(About), typeof(GetByIdAboutDTO)).ReverseMap();
             CreateMap(typeof(About), typeof(ResultAboutDTO)).ReverseMap();
             CreateMap(typeof(About), typeof(UpdateAboutDTO)).ReverseMap();
+
+
+
+            CreateMap(typeof(Contact), typeof(CreateContactDTO)).ReverseMap();
+            CreateMap(typeof(Contact), typeof(GetByIdContactDTO)).ReverseMap();
+            CreateMap(typeof(Contact), typeof(ResultContactDTO)).ReverseMap();
+            CreateMap(typeof(Contact), typeof(UpdateContactDTO)).ReverseMap();
 
         }
     }

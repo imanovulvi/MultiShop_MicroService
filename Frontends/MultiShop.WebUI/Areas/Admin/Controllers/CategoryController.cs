@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using MultiShop.DTOs.DTOs.Catalog.Category;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     public class CategoryController : Controller
     {
@@ -15,13 +18,14 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
         public CategoryController(IConfiguration configuration,IHttpClientFactory httpClient)
         {
-      
+          
             url = configuration["ServiceUrl:Catalog:Category"];
            this. httpClient = httpClient.CreateClient();
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+        
             ViewBag.v0 = "Category";
             ViewBag.v1 = "Home";
             ViewBag.v2 = "Category";
@@ -33,8 +37,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
  
               return View(JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(json));
             }
-
-
             return View();
         }
 
@@ -47,6 +49,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         {
 
             StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Request.Cookies["AccesToken"]);
             HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
             if (response.IsSuccessStatusCode)
             {

@@ -23,7 +23,6 @@ namespace MultiShop.Catalog.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            
             return Ok(await category.GetAllAsync());
         }
 
@@ -34,12 +33,15 @@ namespace MultiShop.Catalog.Controllers
             
             return Ok(await category.GetByIdAsync(id));
         }
+
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryDTO create)
         {
           await  category.CreateAsync(create);
             return Ok("Elave edildi");
         }
+        [Authorize("Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateCategoryDTO update)
         {
@@ -47,6 +49,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Yenilendi");
         }
 
+        [Authorize("Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery]string id)
         {

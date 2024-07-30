@@ -3,9 +3,10 @@
     public class ResultImageDTO
     {
         public string Id { get; set; }
-        public string Image1 { get; set; }
-        public string Image2 { get; set; }
-        public string Image3 { get; set; }
+        public string ImageUrl { get; set; }
+        public string Base64 { get; set; }
+
+
         public string ProductId { get; set; }
     }
 }

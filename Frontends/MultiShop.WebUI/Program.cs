@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using MultiShop.WebUI.AppClasses.Abstractions;
+using MultiShop.WebUI.AppClasses.Concretes;
+
 namespace MultiShop.WebUI
 {
     public class Program
@@ -9,6 +13,15 @@ namespace MultiShop.WebUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
+            builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService));
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt => {
+                opt.Cookie.Name = "Auth";
+                opt.LoginPath = "/Auth/Index";
+
+
+            });
+
+           
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,6 +37,9 @@ namespace MultiShop.WebUI
 
             app.UseRouting();
 
+
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

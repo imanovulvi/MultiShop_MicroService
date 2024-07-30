@@ -32,10 +32,20 @@ namespace MultiShop.Catalog.Controllers
 
             return Ok(await image.GetByIdAsync(id));
         }
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateImageDTO create)
+
+        [HttpGet]
+        public async Task<IActionResult> GetImagesProductById([FromQuery] string productId)
         {
-            await image.CreateAsync(create);
+
+            return Ok(await image.GetImagesProductById(productId));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(IFormFileCollection formCollection,string productId)
+        {
+           var a= Request.Form.Files;
+
+            await image.CreateAsync(productId, Request.Form.Files);
             return Ok("Elave edildi");
         }
         [HttpPut]

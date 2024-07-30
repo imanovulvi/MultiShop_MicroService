@@ -1,0 +1,57 @@
+﻿@model List<ResultCommentDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="col-md-12">
+    <div class="chart-box">
+        <h4>Category Table</h4>
+        <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+        <div class="bs-example" data-example-id="bordered-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>NameSurname</th>
+                        <th>Email</th>
+
+                        <th>CommentDetail</th>
+                        <th>CreateDate</th>
+                        <th>Status</th>
+                        <th>ProductId</th>
+
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is not null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(++count)</th>
+                                <td>@item.NameSurname</td>
+                                <td>@item.Email</td>
+                                <td>@item.CommentDetail</td>
+                                <td>@item.CreateDate.ToShortDateString()</td>
+                                <td>@item.Status</td>
+                                <td>@item.ProductId</td>
+                                <td><a href="/admin/Comment/Update?id=@item.Id" class="btn btn-primary">Update</a></td>
+                                <td><a href="/admin/Comment/Delete?id=@item.Id" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                        }
+
+                    }
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

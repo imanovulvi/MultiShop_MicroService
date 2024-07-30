@@ -15,6 +15,9 @@
         public string BrandCollectionsName { get; set; }
         public string AboutCollectionsName { get; set; }
 
+        public string ContactCollectionsName { get; set; }
+
+
 
 
 
