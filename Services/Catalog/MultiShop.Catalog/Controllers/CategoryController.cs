@@ -41,7 +41,7 @@ namespace MultiShop.Catalog.Controllers
           await  category.CreateAsync(create);
             return Ok("Elave edildi");
         }
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateCategoryDTO update)
         {
@@ -49,7 +49,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Yenilendi");
         }
 
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery]string id)
         {

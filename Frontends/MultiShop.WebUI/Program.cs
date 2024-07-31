@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MultiShop.WebUI.AppClasses.Abstractions;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using MultiShop.WebUI.AppClasses.Concretes;
+using MultiShop.WebUI.AppClasses.Concretes.Services.Catalog;
 
 namespace MultiShop.WebUI
 {
@@ -13,11 +15,21 @@ namespace MultiShop.WebUI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddHttpClient();
-            builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService));
+            builder.Services.AddScoped(typeof(ITokenService), typeof(TokenService)); 
+            builder.Services.AddScoped(typeof(IAboutService), typeof(AboutService));  
+            builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+            builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
+            builder.Services.AddScoped(typeof(IProductDetailService), typeof(ProductDetailService));
+            builder.Services.AddScoped(typeof(IImageService), typeof(ImageService));
+
+
+
+
+
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt => {
                 opt.Cookie.Name = "Auth";
                 opt.LoginPath = "/Auth/Index";
-
+               
 
             });
 

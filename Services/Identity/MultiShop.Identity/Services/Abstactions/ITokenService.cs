@@ -5,6 +5,10 @@ namespace MultiShop.Identity.Services.Abstactions
 {
     public interface ITokenService
     {
-        public Token CreateAccessToken(List<Claim> claims);
+        string CreateAccessToken(List<Claim> claims, DateTime expire);
+
+        string CreateRefreshToken();
+        Token GetTokens(List<Claim> claims, DateTime expire);
+
     }
 }

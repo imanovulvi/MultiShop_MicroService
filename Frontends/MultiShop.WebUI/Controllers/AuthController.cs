@@ -47,6 +47,14 @@ namespace MultiShop.WebUI.Controllers
                    
                     });
 
+                    HttpContext.Response.Cookies.Append("RefreshToken", res.RefreshToken, new CookieOptions
+                    {
+
+                        HttpOnly = true,
+                        Expires = DateTime.UtcNow.AddDays(1)
+
+                    });
+
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, await tokenService.TokenReadAsync(res.AccessToken));
                
                     return Redirect("/Home/Index");

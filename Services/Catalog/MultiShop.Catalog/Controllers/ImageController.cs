@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.DTOs.Image;
@@ -40,6 +41,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok(await image.GetImagesProductById(productId));
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(IFormFileCollection formCollection,string productId)
         {
@@ -48,12 +50,16 @@ namespace MultiShop.Catalog.Controllers
             await image.CreateAsync(productId, Request.Form.Files);
             return Ok("Elave edildi");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateImageDTO update)
         {
             await image.UpdateAsync(update);
             return Ok("Yenilendi");
         }
+
+        [Authorize(Roles = "Admin")]
 
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)

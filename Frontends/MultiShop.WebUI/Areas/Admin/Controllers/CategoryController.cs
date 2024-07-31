@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using MultiShop.DTOs.DTOs.Catalog.Category;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
@@ -14,13 +15,14 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     {
 
         private readonly string url;
-        private readonly HttpClient httpClient;
 
-        public CategoryController(IConfiguration configuration,IHttpClientFactory httpClient)
+        private readonly ICategoryService categoryService;
+
+        public CategoryController(IConfiguration configuration,IHttpClientFactory httpClient, ICategoryService categoryService)
         {
           
             url = configuration["ServiceUrl:Catalog:Category"];
-           this. httpClient = httpClient.CreateClient();
+            this.categoryService = categoryService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -30,14 +32,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Home";
             ViewBag.v2 = "Category";
             ViewBag.v3 = "Category list";
-            HttpResponseMessage response = await httpClient.GetAsync(url+"/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                string json =await response.Content.ReadAsStringAsync();
- 
-              return View(JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(json));
-            }
-            return View();
+            
+
+            return View(await categoryService.GetAllAsync<ResultCategoryDTO>(url));
+
+          
         }
 
         public IActionResult Create()
@@ -48,11 +47,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateCategoryDTO create)
         {
 
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
 
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + HttpContext.Request.Cookies["AccesToken"]);
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+            if (await categoryService.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Category/Index");
             }
@@ -62,9 +58,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async  Task<IActionResult> Delete(string id)
         {
 
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id="+ id);
-            if (response.IsSuccessStatusCode)
+            if (await categoryService.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Category/Index");
             }
@@ -75,16 +69,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id="+id);
-            if (response.IsSuccessStatusCode)
+          var list= await categoryService.GetByIdAsync<UpdateCategoryDTO>(url,id);
+
+            if (list !=null)
             {
-
-
-                string json = await response.Content.ReadAsStringAsync();
-
-               
-
-                return View(JsonConvert.DeserializeObject<UpdateCategoryDTO>(json));
+                return View(list);
             }
 
 
@@ -98,10 +87,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Update(UpdateCategoryDTO categoryDTO)
         {
 
-            StringContent stringContent =new StringContent(JsonConvert.SerializeObject(categoryDTO),Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await categoryService.PutAsync(url, categoryDTO, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Category/Index");
             }

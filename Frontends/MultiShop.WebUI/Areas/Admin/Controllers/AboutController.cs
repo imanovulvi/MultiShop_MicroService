@@ -1,21 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.About;
-using Newtonsoft.Json;
-using System.Text;
+using MultiShop.WebUI.AppClasses.Abstractions;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
+
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class AboutController : Controller
     {
         private readonly string url;
-        private readonly HttpClient httpClient;
+        private readonly IAboutService aboutService;
 
-        public AboutController(IConfiguration configuration, IHttpClientFactory httpClient)
+        public AboutController(IConfiguration configuration, IAboutService aboutService)
         {
 
             url = configuration["ServiceUrl:Catalog:About"];
-            this.httpClient = httpClient.CreateClient();
+        
+            this.aboutService = aboutService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -24,16 +28,9 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Home";
             ViewBag.v2 = "About";
             ViewBag.v3 = "About list";
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
 
-                return View(JsonConvert.DeserializeObject<List<ResultAboutDTO>>(json));
-            }
+            return View(await aboutService.GetAllAsync<ResultAboutDTO>(url));
 
-
-            return View();
         }
 
         public IActionResult Create()
@@ -43,22 +40,19 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateAboutDTO create)
         {
-
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+           
+            if (await aboutService.PostAsync<CreateAboutDTO>(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/About/Index");
             }
             return View();
+
+
         }
 
         public async Task<IActionResult> Delete(string id)
         {
-
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
-            if (response.IsSuccessStatusCode)
+            if (await aboutService.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/About/Index");
             }
@@ -69,37 +63,27 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
-            if (response.IsSuccessStatusCode)
+
+           var obj=await aboutService.GetByIdAsync<UpdateAboutDTO>(url, id);
+
+
+            if (obj !=null)
             {
-
-
-                string json = await response.Content.ReadAsStringAsync();
-
-
-
-                return View(JsonConvert.DeserializeObject<UpdateAboutDTO>(json));
+                return View(obj);
             }
 
 
             return View();
 
         }
-
-
-
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateAboutDTO AboutDTO)
+        public async Task<IActionResult> Update(UpdateAboutDTO aboutDTO)
         {
 
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(AboutDTO), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await aboutService.PutAsync<UpdateAboutDTO>(url, aboutDTO,HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/About/Index");
             }
-
 
             return View();
 

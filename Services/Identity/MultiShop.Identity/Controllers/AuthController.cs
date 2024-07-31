@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MultiShop.Identity.Models.AppClass;
+using MultiShop.Identity.Models.Context;
 using MultiShop.Identity.Models.DTOs.AppUser;
 using MultiShop.Identity.Models.Entitys;
 using MultiShop.Identity.Services.Abstactions;
@@ -16,12 +19,16 @@ namespace MultiShop.Identity.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly RoleManager<AppRole> roleManager;
         private readonly ITokenService tokenService;
+        private readonly IConfiguration configuration;
+        private readonly AppIdentityDBContext context;
 
-        public AuthController(UserManager<AppUser> userManager,RoleManager<AppRole> roleManager,ITokenService tokenService)
+        public AuthController(UserManager<AppUser> userManager,RoleManager<AppRole> roleManager,ITokenService tokenService,AppIdentityDBContext context,IConfiguration configuration)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.tokenService = tokenService;
+            this.configuration = configuration;
+            this.context = context;
         }
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateAppUserDTO request) 
@@ -78,7 +85,12 @@ namespace MultiShop.Identity.Controllers
                     {
                         claims.Add(new Claim(ClaimTypes.Role,item));
                     }
-                    Token token =tokenService.CreateAccessToken(claims);
+                    Token token =tokenService.GetTokens(claims, DateTime.UtcNow.AddMinutes(int.Parse(configuration["JWT:expires"])));
+
+                    result.RefreshToken=token.RefreshToken;
+                    result.RefreshTokenExpire=token.RefreshTokenExpire;
+                    context.Users.Update(result);
+                   await context.SaveChangesAsync();
                     return Ok(token);
                 }
                 else
@@ -113,6 +125,24 @@ namespace MultiShop.Identity.Controllers
 
 
             return Ok("Errors");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> UserInfo(Guid id)
+        {
+
+            AppUser user = await context.Users.FindAsync(id);
+            AppUserInfo userInfo =new() 
+            {
+                Id=user.Id,
+                Name=user.Name,
+                Surname=user.Surname,
+                Email=user.Email,
+                UserName=user.UserName
+            };
+
+            return Ok(userInfo);
         }
     }
 }

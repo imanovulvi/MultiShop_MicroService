@@ -6,5 +6,7 @@ namespace MultiShop.Identity.Models.Entitys
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpire { get; set; }
     }
 }
