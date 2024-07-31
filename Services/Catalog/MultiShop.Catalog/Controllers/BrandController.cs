@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.DTOs.Brand;
@@ -32,12 +33,16 @@ namespace MultiShop.Catalog.Controllers
 
             return Ok(await brand.GetByIdAsync(id));
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateBrandDTO create)
         {
             await brand.CreateAsync(create);
             return Ok("Elave edildi");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateBrandDTO update)
         {
@@ -45,6 +50,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Yenilendi");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)
         {

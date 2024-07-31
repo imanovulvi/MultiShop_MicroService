@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.DTOs.DiscountOffer;
@@ -32,18 +33,24 @@ namespace MultiShop.Catalog.Controllers
 
             return Ok(await discountOffer.GetByIdAsync(id));
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateDiscountOfferDTO create)
         {
             await discountOffer.CreateAsync(create);
             return Ok("Elave edildi");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateDiscountOfferDTO update)
         {
             await discountOffer.UpdateAsync(update);
             return Ok("Yenilendi");
         }
+
+        [Authorize(Roles = "Admin")]
 
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.SpecialOffer;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -9,13 +10,15 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
     public class SpecialOfferController : Controller
     {
         private readonly string url;
-        private readonly HttpClient httpClient;
+     
+        private readonly ISpecialOfferService offerService;
 
-        public SpecialOfferController(IConfiguration configuration, IHttpClientFactory httpClient)
+        public SpecialOfferController(IConfiguration configuration, ISpecialOfferService offerService)
         {
 
             url = configuration["ServiceUrl:Catalog:SpecialOffer"];
-            this.httpClient = httpClient.CreateClient();
+          
+            this.offerService = offerService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -24,16 +27,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Home";
             ViewBag.v2 = "SpecialOffer";
             ViewBag.v3 = "SpecialOffer list";
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
 
-                return View(JsonConvert.DeserializeObject<List<ResultSpecialOfferDTO>>(json));
-            }
+            return View(await offerService.GetAllAsync<ResultSpecialOfferDTO>(url));
 
-
-            return View();
+           
         }
 
         public IActionResult Create()
@@ -44,9 +41,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateSpecialOfferDTO create)
         {
 
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+            if (await offerService.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/SpecialOffer/Index");
             }
@@ -55,9 +50,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string id)
         {
 
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
-            if (response.IsSuccessStatusCode)
+            if (await offerService.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/SpecialOffer/Index");
             }
@@ -68,20 +61,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
-            if (response.IsSuccessStatusCode)
-            {
-
-
-                string json = await response.Content.ReadAsStringAsync();
-
-
-
-                return View(JsonConvert.DeserializeObject<UpdateSpecialOfferDTO>(json));
-            }
-
-
-            return View();
+            return View(await offerService.GetByIdAsync<UpdateSpecialOfferDTO>(url, id));
 
         }
 
@@ -91,10 +71,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Update(UpdateSpecialOfferDTO categoryDTO)
         {
 
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(categoryDTO), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await offerService.PutAsync(url, categoryDTO, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/SpecialOffer/Index");
             }

@@ -1,30 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.FeatureSlider;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class FeatureSliderController : Controller
     {
         string url = "";
-        HttpClient httpClient;
 
-        public FeatureSliderController(IHttpClientFactory httpClientFactory,IConfiguration configuration)
+        private readonly IFeatureSliderService sliderService;
+
+        public FeatureSliderController(IConfiguration configuration,IFeatureSliderService sliderService)
         {
             url = configuration["ServiceUrl:Catalog:FeatureSlider"];
-            httpClient = httpClientFactory.CreateClient();
+           
+            this.sliderService = sliderService;
         }
         public async Task<IActionResult> Index()
         {
-           HttpResponseMessage response=await  httpClient.GetAsync(url+"/Get");
-            if (response.IsSuccessStatusCode)
-            {
-              return View(JsonConvert.DeserializeObject<List<ResultFeatureSliderDTO>>(await response.Content.ReadAsStringAsync()));
 
-            }
-            return View();
+            ViewBag.v0 = "FeatureSlider";
+            ViewBag.v1 = "Home";
+            ViewBag.v2 = "FeatureSlider";
+            ViewBag.v3 = "FeatureSlider list";
+            return View(await  sliderService.GetAllAsync<ResultFeatureSliderDTO>(url));
+
+          
         }
 
         public IActionResult Create()
@@ -35,9 +41,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateFeatureSliderDTO create)
         {
 
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+            if (await sliderService.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/FeatureSlider/Index");
             }
@@ -47,9 +51,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string id)
         {
 
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
-            if (response.IsSuccessStatusCode)
+            if (await sliderService.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/FeatureSlider/Index");
             }
@@ -60,34 +62,19 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
-            if (response.IsSuccessStatusCode)
-            {
+            return View(await sliderService.GetByIdAsync<UpdateFeatureSliderDTO>(url, id));
 
-
-                string json = await response.Content.ReadAsStringAsync();
-                return View(JsonConvert.DeserializeObject<UpdateFeatureSliderDTO>(json));
-            }
-
-
-            return View();
 
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateFeatureSliderDTO categoryDTO)
         {
 
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(categoryDTO), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await sliderService.PutAsync(url, categoryDTO, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/FeatureSlider/Index");
             }
-
 
             return View();
 

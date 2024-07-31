@@ -21,7 +21,11 @@ namespace MultiShop.WebUI
             builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
             builder.Services.AddScoped(typeof(IProductDetailService), typeof(ProductDetailService));
             builder.Services.AddScoped(typeof(IImageService), typeof(ImageService));
-
+            builder.Services.AddScoped(typeof(IBrandService), typeof(BrandService));
+            builder.Services.AddScoped(typeof(IFeatureSliderService), typeof(FeatureSliderService));
+            builder.Services.AddScoped(typeof(IFeaturedService), typeof(FeaturedService));
+            builder.Services.AddScoped(typeof(IDiscountOfferService), typeof(DiscountOfferService));
+            builder.Services.AddScoped(typeof(ISpecialOfferService), typeof(SpecialOfferService));
 
 
 

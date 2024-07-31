@@ -1,21 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.DiscountOffer;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     public class DiscountOfferController : Controller
     {
         private readonly string url;
-        private readonly HttpClient httpClient;
 
-        public DiscountOfferController(IConfiguration configuration, IHttpClientFactory httpClient)
+        private readonly IDiscountOfferService discountOffer;
+
+        public DiscountOfferController(IConfiguration configuration, IDiscountOfferService discountOffer)
         {
 
             url = configuration["ServiceUrl:Catalog:DiscountOffer"];
-            this.httpClient = httpClient.CreateClient();
+
+            this.discountOffer = discountOffer;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -24,16 +29,9 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Home";
             ViewBag.v2 = "DiscountOffer";
             ViewBag.v3 = "DiscountOffer list";
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
 
-                return View(JsonConvert.DeserializeObject<List<ResultDiscountOfferDTO>>(json));
-            }
+            return View(await discountOffer.GetAllAsync<ResultDiscountOfferDTO>(url));
 
-
-            return View();
         }
 
         public IActionResult Create()
@@ -44,9 +42,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateDiscountOfferDTO create)
         {
 
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+            if (await discountOffer.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/DiscountOffer/Index");
             }
@@ -56,9 +52,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string id)
         {
 
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
-            if (response.IsSuccessStatusCode)
+            if (await discountOffer.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/DiscountOffer/Index");
             }
@@ -69,20 +63,8 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
-            if (response.IsSuccessStatusCode)
-            {
+            return View(await discountOffer.GetByIdAsync<UpdateDiscountOfferDTO>(url,id));
 
-
-                string json = await response.Content.ReadAsStringAsync();
-
-
-
-                return View(JsonConvert.DeserializeObject<UpdateDiscountOfferDTO>(json));
-            }
-
-
-            return View();
 
         }
 
@@ -91,15 +73,10 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateDiscountOfferDTO discountOfferDTO)
         {
-
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(discountOfferDTO), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await discountOffer.PutAsync(url, discountOfferDTO, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/DiscountOffer/Index");
             }
-
 
             return View();
 

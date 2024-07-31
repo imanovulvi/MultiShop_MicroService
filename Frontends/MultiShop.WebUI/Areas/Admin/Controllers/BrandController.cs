@@ -1,21 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Brand;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     public class BrandController : Controller
     {
         private readonly string url;
-        private readonly HttpClient httpClient;
+        private readonly IBrandService brandService;
 
-        public BrandController(IConfiguration configuration, IHttpClientFactory httpClient)
+        public BrandController(IConfiguration configuration, IBrandService brandService)
         {
 
             url = configuration["ServiceUrl:Catalog:Brand"];
-            this.httpClient = httpClient.CreateClient();
+            this.brandService = brandService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -24,16 +27,9 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
             ViewBag.v1 = "Home";
             ViewBag.v2 = "Brand";
             ViewBag.v3 = "Brand list";
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
 
-                return View(JsonConvert.DeserializeObject<List<ResultBrandDTO>>(json));
-            }
+            return View(await brandService.GetAllAsync<ResultBrandDTO>(url));
 
-
-            return View();
         }
 
         public IActionResult Create()
@@ -43,10 +39,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBrandDTO create)
         {
-
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+            if (await brandService.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Brand/Index");
             }
@@ -55,10 +48,7 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-
-
-            HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
-            if (response.IsSuccessStatusCode)
+            if (await brandService.DeleteAsync(url, id, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Brand/Index");
             }
@@ -69,33 +59,17 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
-            if (response.IsSuccessStatusCode)
-            {
-
-
-                string json = await response.Content.ReadAsStringAsync();
-
-
-
-                return View(JsonConvert.DeserializeObject<UpdateBrandDTO>(json));
-            }
-
-
-            return View();
+            return View(await  brandService.GetByIdAsync<UpdateBrandDTO>(url, id));
 
         }
 
 
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateBrandDTO BrandDTO)
+        public async Task<IActionResult> Update(UpdateBrandDTO brandDTO)
         {
 
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(BrandDTO), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await brandService.PutAsync(url, brandDTO, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Admin/Brand/Index");
             }

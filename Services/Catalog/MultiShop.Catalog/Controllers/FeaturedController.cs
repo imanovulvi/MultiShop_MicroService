@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DTO=MultiShop.Catalog.DTOs.Featured;
 using MultiShop.Catalog.Services.Featured;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MultiShop.Catalog.Controllers
 {
@@ -26,6 +27,7 @@ namespace MultiShop.Catalog.Controllers
         }
 
 
+
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] string id)
         {
@@ -34,7 +36,7 @@ namespace MultiShop.Catalog.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)
         {
@@ -42,12 +44,15 @@ namespace MultiShop.Catalog.Controllers
             return Ok("silindi");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(DTO.CreateFeaturedDTO create)
         {
             await Featured.CreateAsync(create);
             return Ok("Elave edildi");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Update(DTO.UpdateFeaturedDTO update)
         {
