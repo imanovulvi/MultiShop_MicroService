@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -35,7 +36,7 @@ namespace MultiShop.Comment.Controllers
         }
 
 
-
+        [Authorize(Roles ="User")]
         [HttpPost]
         public async Task<IActionResult> Create(ET.Comment comment)
         {
@@ -44,7 +45,7 @@ namespace MultiShop.Comment.Controllers
             return Ok("Elave olundu");
         }
 
-
+        [Authorize(Roles = "User")]
         [HttpPut]
         public async Task<IActionResult> Update(ET.Comment comment)
         {
@@ -52,7 +53,7 @@ namespace MultiShop.Comment.Controllers
             await context.SaveChangesAsync();
             return Ok("Yenilendi");
         }
-
+        [Authorize(Roles = "User")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

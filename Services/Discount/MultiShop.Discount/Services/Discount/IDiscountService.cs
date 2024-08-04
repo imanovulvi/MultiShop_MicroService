@@ -6,6 +6,7 @@ namespace MultiShop.Discount.Services.Discount
     {
         Task<List<ResultDiscountDTO>> GetAllAsync();
         Task <GetByIdDiscountDTO> GetByIdAsync(int id);
+        Task<ResultDiscountDTO> GetByCodeAsync(string code);
         Task Update(UpdateDiscountDTO updateDiscount);
         Task DeleteAsync(int id);
         Task CreateAsync(CreateDiscountDTO createDiscount); 

@@ -1,0 +1,7 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Abstractions\Repository\IRepository.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Concretes\Context\CargoDBContext.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Concretes\Repository\Repository.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Extensions\Registrations.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Migrations\20240720163905_mg1.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Migrations\20240720163905_mg1.Designer.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DataAccessLayer\Migrations\CargoDBContextModelSnapshot.cs

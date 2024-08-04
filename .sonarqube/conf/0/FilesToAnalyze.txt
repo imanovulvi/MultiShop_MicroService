@@ -1,0 +1,3 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Order\Core\MultiShop.Order.Domain\Entitys\Adress.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Core\MultiShop.Order.Domain\Entitys\OrderDetail.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Core\MultiShop.Order.Domain\Entitys\Ordering.cs

@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.Commands.Adress.Create;
 using MultiShop.Order.Application.Features.Commands.Adress.Remove;
 using MultiShop.Order.Application.Features.Commands.Adress.Update;
 using MultiShop.Order.Application.Features.Queries.Adress.GetAll;
+using MultiShop.Order.Application.Features.Queries.Adress.GetByUserId;
 
 namespace MultiShop.Order.WebAPI.Controllers
 {
@@ -18,12 +20,20 @@ namespace MultiShop.Order.WebAPI.Controllers
         {
             this.mediator = mediator;
         }
-      
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
            var list= await mediator.Send(new GetAllAdressQueryRequest());
             return Ok(list);
+
+        }
+        [Authorize(Roles ="User")]
+        [HttpGet]
+        public async Task<IActionResult> GetByUserId(string userId)
+        {
+            GetByUserIdQueryRequest request = new() {UserId=userId };
+            return Ok(await mediator.Send(request));
 
         }
 

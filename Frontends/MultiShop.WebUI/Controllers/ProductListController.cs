@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Comment;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Comment;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -7,12 +8,14 @@ namespace MultiShop.WebUI.Controllers
 {
     public class ProductListController : Controller
     {
-        private readonly HttpClient httpClient;
+
+        private readonly ICommentService commentService;
         string urlComment = "";
-        public ProductListController(IHttpClientFactory httpClientFactory,IConfiguration configuration)
+        public ProductListController(ICommentService commentService,IConfiguration configuration)
         {
-            httpClient=httpClientFactory.CreateClient();
+           
             urlComment = configuration["ServiceUrl:Comment"];
+            this.commentService = commentService;
         }
 
         public IActionResult Index(string id)
@@ -34,9 +37,7 @@ namespace MultiShop.WebUI.Controllers
             dto.Status = true;
             dto.Rating = 2;
 
-            StringContent stringContent=new StringContent(JsonConvert.SerializeObject(dto),Encoding.UTF8,"application/json");
-            HttpResponseMessage response=await httpClient.PostAsync(urlComment+"/Create", stringContent);
-            if (response.IsSuccessStatusCode)
+            if (await commentService.PostAsync(urlComment, dto, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return RedirectToAction("Index", "ProductList");
             }

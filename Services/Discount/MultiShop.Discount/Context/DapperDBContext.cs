@@ -17,10 +17,10 @@ namespace MultiShop.Discount.Context
         public DbSet<ET.Discount> Discounts { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("SqlConStr"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultSqlCon"));
 
         }
 
-        public IDbConnection CreateConnection() => new SqlConnection(configuration.GetConnectionString("SqlConStr"));
+        public IDbConnection CreateConnection() => new SqlConnection(configuration.GetConnectionString("DefaultSqlCon"));
     }
 }

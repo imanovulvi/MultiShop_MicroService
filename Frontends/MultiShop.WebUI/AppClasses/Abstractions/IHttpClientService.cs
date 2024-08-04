@@ -2,6 +2,7 @@
 {
     public interface IHttpClientService
     {
+
         Task<List<T>> GetAllAsync<T>(string url, string header = null) where T : class;
         Task<bool> PostAsync<T>(string url, T obj, string header = null) where T : class;
         Task<bool> DeleteAsync(string url, string id, string header=null);

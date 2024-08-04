@@ -22,14 +22,14 @@ namespace MultiShop.Basket.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get() 
         {
-           Claim claim= Request.HttpContext.User.Claims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier);
+           Claim? claim= Request.HttpContext.User.Claims.FirstOrDefault(x=>x.Type==ClaimTypes.NameIdentifier);
             
             var baskets = await redisService.GetAsync<BasketTotalDTO>(claim.Value);
             return Ok(baskets);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(BasketTotalDTO basket)
+        public async Task<IActionResult> Create(BasketTotalDTO basket)
         {
             Claim claim = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
             await redisService.SetAsync<BasketTotalDTO>(claim.Value, basket);
@@ -37,10 +37,10 @@ namespace MultiShop.Basket.WebAPI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(string key)
+        public async Task<IActionResult> Delete(string id)
         {
 
-            await redisService.DeleteAsync(key);
+            await redisService.DeleteAsync(id);
             return Ok("Silindi");
         }
 

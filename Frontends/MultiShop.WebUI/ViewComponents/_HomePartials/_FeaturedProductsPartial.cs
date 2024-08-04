@@ -1,30 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Product;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
     public class _FeaturedProductsPartial : ViewComponent
     {
+        private readonly IProductService productService;
         string url = "";
 
-        HttpClient httpClient;
-
-        public _FeaturedProductsPartial(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public _FeaturedProductsPartial(IProductService productService, IConfiguration configuration)
         {
             url = configuration["ServiceUrl:Catalog:Product"];
-            httpClient = httpClientFactory.CreateClient();
+
+            this.productService = productService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                return View(JsonConvert.DeserializeObject<List<ResultProductDTO>>(await response.Content.ReadAsStringAsync()));
-
-            }
-            return View();
+            return View(await productService.GetAllAsync<ResultProductDTO>(url));
 
         }
     }

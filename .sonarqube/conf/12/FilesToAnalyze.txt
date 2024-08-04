@@ -1,0 +1,9 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Abstractions\ICargoDetailService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Abstractions\ICargoOperationService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Abstractions\ICompanyService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Abstractions\ICustomerService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Concretes\CargoDetailManager.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Concretes\CargoOperationManager.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Concretes\CompanyManager.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Concretes\CustomerManager.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.BusinesLayer\Extensions\Registartions.cs

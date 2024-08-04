@@ -1,0 +1,4 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.EntitysLayer\Entitys\CargoDetail.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.EntitysLayer\Entitys\CargoOperation.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.EntitysLayer\Entitys\Company.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.EntitysLayer\Entitys\Customer.cs

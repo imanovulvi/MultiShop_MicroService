@@ -1,31 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Brand;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
     public class _BreadPartial : ViewComponent
     {
+        private readonly IBrandService brandService;
         string url = "";
 
-        HttpClient httpClient;
 
-        public _BreadPartial(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public _BreadPartial(IBrandService brandService, IConfiguration configuration)
         {
             url = configuration["ServiceUrl:Catalog:Brand"];
 
-            httpClient = httpClientFactory.CreateClient();
+            
+            this.brandService = brandService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                return View(JsonConvert.DeserializeObject<List<ResultBrandDTO>>(await response.Content.ReadAsStringAsync()));
-
-            }
-            return View();
-
+            return View(await brandService.GetAllAsync<ResultBrandDTO>(url));
         }
     }
 }

@@ -1,31 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Category;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 
 namespace MultiShop.WebUI._LayoutPartials.ViewComponents
 {
     public class _NavbarPartial:ViewComponent
     {
-        string url = "";
-        string urlSpecialOffer = "";
-        HttpClient httpClient;
+        private readonly ICategoryService categoryService;
+        private readonly IFeatureSliderService featureSlider;
+   
+        string urlCategory = "";
+       
 
-        public _NavbarPartial(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public _NavbarPartial(ICategoryService categoryService, IConfiguration configuration)
         {
-            url = configuration["ServiceUrl:Catalog:FeatureSlider"];
-            urlSpecialOffer = configuration["ServiceUrl:Catalog:Category"];
-            httpClient = httpClientFactory.CreateClient();
+           // url = configuration["ServiceUrl:Catalog:FeatureSlider"];
+            urlCategory = configuration["ServiceUrl:Catalog:Category"];
+            
+            this.categoryService = categoryService;
+           // this.featureSlider = featureSlider;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            HttpResponseMessage responseSpecialOffer = await httpClient.GetAsync(urlSpecialOffer + "/Get");
-            if (responseSpecialOffer.IsSuccessStatusCode)
-            {
-                return View(JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(await responseSpecialOffer.Content.ReadAsStringAsync()));
 
-            }
+            return View(await categoryService.GetAllAsync<ResultCategoryDTO>(urlCategory));
 
-            return View();
+         
 
         }
     }

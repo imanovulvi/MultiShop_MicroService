@@ -10,7 +10,7 @@ namespace MultiShop.WebUI.AppClasses.Concretes.Services.Catalog
         {
 
             if (header != null)
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+                AddHeader(header);
 
             HttpResponseMessage response = await httpClient.GetAsync(url + "/GetDetailProductById?productId=" + productId);
 

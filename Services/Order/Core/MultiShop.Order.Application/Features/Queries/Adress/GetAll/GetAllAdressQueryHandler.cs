@@ -27,11 +27,14 @@ namespace MultiShop.Order.Application.Features.Queries.Adress.GetAll
             {
                 response.Add(new GetAllAdressQueryResponse()
                 {
-                    Id = item.Id,
+                      Id = item.Id,
                     City = item.City,
+                    UserId = item.UserId,
                     Destrict = item.Destrict,
-                    Detail = item.Detail,
-                    UserId = item.UserId
+                    Detail1 = item.Detail1,
+                    Detail2 = item.Detail2,
+                    Country = item.Country,
+                    ZipCode = item.ZipCode
                 });
             }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Contact;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -7,15 +8,17 @@ namespace MultiShop.WebUI.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly IContactService contactService;
         string url = "";
 
-        HttpClient httpClient;
 
-        public ContactController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+
+        public ContactController(IContactService contactService, IConfiguration configuration)
         {
             url = configuration["ServiceUrl:Catalog:Contact"];
 
-            httpClient = httpClientFactory.CreateClient();
+
+            this.contactService = contactService;
         }
 
         public IActionResult Index()
@@ -28,9 +31,8 @@ namespace MultiShop.WebUI.Controllers
         {
             create.SendDate = DateTime.Now;
             create.IsRead = false;
-            StringContent stringConten = new StringContent(JsonConvert.SerializeObject(create), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
-            if (response.IsSuccessStatusCode)
+
+            if (await contactService.PostAsync(url, create, HttpContext.Request.Cookies["AccesToken"]))
             {
                 return Redirect("/Contact/Index");
             }

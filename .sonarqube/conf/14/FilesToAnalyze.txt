@@ -1,0 +1,12 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\Controllers\AdressesController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\Controllers\OrderDetailsController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\Controllers\OrderingsController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\Program.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\obj\Debug\net8.0\MultiShop.Order.WebAPI.GlobalUsings.g.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\obj\Debug\net8.0\MultiShop.Order.WebAPI.AssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\obj\Debug\net8.0\MultiShop.Order.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\appsettings.Development.json
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\appsettings.json
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI.http
+C:\Users\imano\source\repos\MultiShop\Services\Order\Presentation\MultiShop.Order.WebAPI\MultiShop.Order.WebAPI\Properties\launchSettings.json

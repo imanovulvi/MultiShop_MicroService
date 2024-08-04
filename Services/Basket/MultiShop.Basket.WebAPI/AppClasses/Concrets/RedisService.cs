@@ -1,4 +1,5 @@
-﻿using MultiShop.Basket.WebAPI.AppClasses.Abstarctions;
+﻿using Microsoft.AspNetCore.Authorization;
+using MultiShop.Basket.WebAPI.AppClasses.Abstarctions;
 using MultiShop.Basket.WebAPI.DTOs;
 using Newtonsoft.Json;
 using StackExchange.Redis;
@@ -21,6 +22,7 @@ namespace MultiShop.Basket.WebAPI.AppClasses.Concrets
             db = connectionMultiplexer.GetDatabase(Convert.ToInt32(configuration["RedisSettings:DB"]));
 
         }
+
         public async Task<bool> DeleteAsync(string key)
         {
            

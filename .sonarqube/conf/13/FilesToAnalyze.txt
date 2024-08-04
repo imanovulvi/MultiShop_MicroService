@@ -1,0 +1,6 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Context\OrderDBContext.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Extensions\Registrations.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Migrations\20240718074153_mg1.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Migrations\20240718074153_mg1.Designer.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Migrations\OrderDBContextModelSnapshot.cs
+C:\Users\imano\source\repos\MultiShop\Services\Order\Infrastructure\MultiShop.Order.Persistence\Repository\Repository.cs

@@ -29,6 +29,25 @@ namespace MultiShop.Discount.Controllers
             return Ok(await discountService.GetByIdAsync(id));
 
         }
+        [HttpGet]
+        public async Task<IActionResult> GetByCode(string code)
+        {
+            return Ok(await discountService.GetByCodeAsync(code));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByCodeIsActive(string code)
+        {
+            ResultDiscountDTO result = await discountService.GetByCodeAsync(code);
+            if (result is not null)
+                if (result.IsDelete && result.ValidDate > DateTime.UtcNow)
+                {
+                    return Ok(result);
+                }
+
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateDiscountDTO createDiscountDTO)
         {

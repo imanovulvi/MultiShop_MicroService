@@ -1,0 +1,13 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Controllers\CargoDetailController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Controllers\CargoOperationController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Controllers\CompanyController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Controllers\CustomerController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Program.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\obj\Debug\net8.0\MultiShop.Cargo.API.GlobalUsings.g.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\obj\Debug\net8.0\MultiShop.Cargo.API.AssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\obj\Debug\net8.0\MultiShop.Cargo.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\appsettings.Development.json
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\appsettings.json
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\MultiShop.Cargo.API.http
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.API\Properties\launchSettings.json

@@ -52,6 +52,16 @@ namespace MultiShop.Discount.Services.Discount
            
         }
 
+        public async Task<ResultDiscountDTO> GetByCodeAsync(string code)
+        {
+            string query = "select * from Discounts where Code=@code";
+            DynamicParameters dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@code", code);
+            using var con = context.CreateConnection();
+            return await con.QueryFirstOrDefaultAsync<ResultDiscountDTO>(query, dynamicParameters);
+
+        }
+
         public async Task Update(UpdateDiscountDTO updateDiscount)
         {
             string query = "update Discounts set Code=@code,Rate=@rate,isDelete =@isDelete,ValidDate=@validDate where Id=@id";

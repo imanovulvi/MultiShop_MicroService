@@ -1,39 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.FeatureSlider;
 using MultiShop.DTOs.DTOs.Catalog.SpecialOffer;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.ViewComponents._HomePartials
 {
     public class _CarouselPartial : ViewComponent
     {
-        string url = "";
+        private readonly ISpecialOfferService specialOfferService;
+        private readonly IFeatureSliderService featureSliderService;
+        string urlFeatureSlider = "";
         string urlSpecialOffer = "";
         HttpClient httpClient;
 
-        public _CarouselPartial(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public _CarouselPartial(ISpecialOfferService specialOfferService,IFeatureSliderService featureSliderService, IConfiguration configuration)
         {
-            url = configuration["ServiceUrl:Catalog:FeatureSlider"];
+            urlFeatureSlider = configuration["ServiceUrl:Catalog:FeatureSlider"];
             urlSpecialOffer = configuration["ServiceUrl:Catalog:SpecialOffer"];
-            httpClient = httpClientFactory.CreateClient();
+            this.specialOfferService = specialOfferService;
+            this.featureSliderService = featureSliderService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            HttpResponseMessage responseSpecialOffer = await httpClient.GetAsync(urlSpecialOffer + "/Get");
-            if (responseSpecialOffer.IsSuccessStatusCode)
-            {
-                ViewBag.specialOffer = JsonConvert.DeserializeObject<List<ResultSpecialOfferDTO>>(await responseSpecialOffer.Content.ReadAsStringAsync());
+           var specialList= await specialOfferService.GetAllAsync<ResultSpecialOfferDTO>(urlSpecialOffer);
 
-            }
+            if (specialList !=null)
+                ViewBag.specialOffer = specialList;
 
+          var featureList = await featureSliderService.GetAllAsync<ResultFeatureSliderDTO>(urlFeatureSlider);
 
+           
+            if (featureList !=null)
+                return View(featureList);
 
-            HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-            if (response.IsSuccessStatusCode)
-            {
-                return View(JsonConvert.DeserializeObject<List<ResultFeatureSliderDTO>>(await response.Content.ReadAsStringAsync()));
-
-            }
+            
             return View();
 
         }

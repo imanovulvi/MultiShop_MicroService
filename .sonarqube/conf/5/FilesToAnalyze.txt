@@ -1,0 +1,15 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\AppClasses\Abstarctions\IRedisService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\AppClasses\Concrets\RedisService.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\Controllers\BasketController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\DTOs\BasketDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\DTOs\BasketTotalDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\Extensions\Registrarions.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\Program.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\obj\Debug\net8.0\MultiShop.Basket.WebAPI.GlobalUsings.g.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\obj\Debug\net8.0\MultiShop.Basket.WebAPI.AssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\obj\Debug\net8.0\MultiShop.Basket.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\appsettings.Development.json
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\appsettings.json
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\MultiShop.Basket.WebAPI.http
+C:\Users\imano\source\repos\MultiShop\Services\Basket\MultiShop.Basket.WebAPI\Properties\launchSettings.json

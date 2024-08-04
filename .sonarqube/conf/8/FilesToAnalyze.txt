@@ -1,0 +1,17 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Context\CommentDBContext.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Controllers\CommentController.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Entitys\Comment.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Migrations\20240727095310_mg1.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Migrations\20240727095310_mg1.Designer.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Migrations\20240727103054_mg2.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Migrations\20240727103054_mg2.Designer.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Migrations\CommentDBContextModelSnapshot.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Program.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\obj\Debug\net8.0\MultiShop.Comment.GlobalUsings.g.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\obj\Debug\net8.0\MultiShop.Comment.AssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\obj\Debug\net8.0\MultiShop.Comment.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\appsettings.Development.json
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\appsettings.json
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\MultiShop.Comment.http
+C:\Users\imano\source\repos\MultiShop\Services\Comment\MultiShop.Comment\Properties\launchSettings.json

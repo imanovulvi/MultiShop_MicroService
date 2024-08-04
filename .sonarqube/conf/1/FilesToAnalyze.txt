@@ -1,0 +1,12 @@
+﻿C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoDetail\CreateCargoDetailDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoDetail\GetCargoDetailDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoDetail\UpdateCargoDetailDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoOperation\CreateCargoOperationDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoOperation\GetCargoOperationDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\CargoOperation\UpdateCargoOperationDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Company\CreateCompanyDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Company\GetCompanyDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Company\UpdateCompanyDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Customer\CreateCustomerDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Customer\GetCustomerDTO.cs
+C:\Users\imano\source\repos\MultiShop\Services\Cargo\MultiShop.Cargo.DTOsLayer\DTOs\Customer\UpdateCustomerDTO.cs

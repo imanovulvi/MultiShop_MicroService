@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Catalog.DTOs.Contact;
@@ -18,6 +19,7 @@ namespace MultiShop.Catalog.Controllers
             this.mapper = mapper;
             this.Contact = Contact;
         }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -32,6 +34,8 @@ namespace MultiShop.Catalog.Controllers
 
             return Ok(await Contact.GetByIdAsync(id));
         }
+
+        [Authorize(Roles ="User")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateContactDTO create)
         {
@@ -45,6 +49,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Yenilendi");
         }
 
+        [Authorize(Roles = "Admin,User")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string id)
         {

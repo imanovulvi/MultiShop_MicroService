@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.Image;
 using MultiShop.DTOs.DTOs.Catalog.Product;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,37 +9,29 @@ namespace MultiShop.WebUI.ViewComponents._ProductListPartials
 {
     public class _ShopProductPartial:ViewComponent
     {
+        private readonly IProductService productService;
         string url = "";
    
         HttpClient httpClient;
 
-        public _ShopProductPartial(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public _ShopProductPartial(IProductService productService,IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             url = configuration["ServiceUrl:Catalog:Product"];
          
 
             httpClient = httpClientFactory.CreateClient();
+            this.productService = productService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             if (ViewBag.id is not null)
             {
+                return View(await productService.GetProductsByCategoryIdAsync(url, ViewBag.id));
                
-                HttpResponseMessage response = await httpClient.GetAsync(url + "/GetProductsCategoryById?categoryId=" + ViewBag.id);
-                if (response.IsSuccessStatusCode)
-                {
-                    return View(JsonConvert.DeserializeObject<List<ResultProductDTO>>(await response.Content.ReadAsStringAsync()));
-
-                }
             }
             else
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
-                if (response.IsSuccessStatusCode)
-                {
-                    return View(JsonConvert.DeserializeObject<List<ResultProductDTO>>(await response.Content.ReadAsStringAsync()));
-
-                }
+                return View(await productService.GetAllAsync<ResultProductDTO>(url));
             }
             return View();
 

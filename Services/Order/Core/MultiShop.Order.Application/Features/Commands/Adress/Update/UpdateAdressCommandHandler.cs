@@ -27,8 +27,11 @@ namespace MultiShop.Order.Application.Features.Commands.Adress.Update
                 Id = request.Id,
                 City = request.City,
                 UserId = request.UserId,
-                Detail = request.Detail,
-                Destrict = request.Destrict
+                Destrict = request.Destrict,
+                Detail1 = request.Detail1,
+                Detail2 = request.Detail2,
+                Country = request.Country,
+                ZipCode = request.ZipCode
             };
             await repository.UpdateAsync(entity);
         }

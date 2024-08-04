@@ -18,10 +18,17 @@ namespace MultiShop.WebUI.AppClasses.Concretes
            
             this.httpClient = new HttpClient();
         }
+
+        public void AddHeader(string header)
+        {
+            httpClient.DefaultRequestHeaders.Remove("Authorization");
+            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+        }
         public async Task<List<T>> GetAllAsync<T>(string url,string header=null) where T : class
         {
-            if(header !=null)
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+            if (header != null)
+                AddHeader(header);
+
             HttpResponseMessage response = await httpClient.GetAsync(url + "/Get");
            
 
@@ -34,10 +41,14 @@ namespace MultiShop.WebUI.AppClasses.Concretes
             }
             return null;
         }
-        public async virtual Task<bool> PostAsync<T>(string url, T obj,string header=null) where T : class
+        public async  Task<bool> PostAsync<T>(string url, T obj,string header=null) where T : class
         {
             if (header != null)
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+                AddHeader(header);
+
+
+
+
 
             StringContent stringConten = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await httpClient.PostAsync(url + "/Create", stringConten);
@@ -48,7 +59,7 @@ namespace MultiShop.WebUI.AppClasses.Concretes
         public async Task<bool> DeleteAsync(string url,string id,string header= null)
         {
             if (header != null)
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+                AddHeader(header);
 
             HttpResponseMessage response = await httpClient.DeleteAsync(url + "/Delete?id=" + id);
             return response.IsSuccessStatusCode;
@@ -57,10 +68,11 @@ namespace MultiShop.WebUI.AppClasses.Concretes
 
         public async Task<bool> PutAsync<T>(string url,T obj, string header = null) where T : class
         {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
-
             if (header != null)
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+                AddHeader(header);
+
+
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PutAsync(url + "/Update", stringContent);
             return response.IsSuccessStatusCode;
@@ -70,7 +82,8 @@ namespace MultiShop.WebUI.AppClasses.Concretes
         public async Task<TResult> GetByIdAsync<TResult>(string url, string id,string header) where TResult : class
         {
             if (header != null)
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + header);
+                AddHeader(header);
+
             HttpResponseMessage response = await httpClient.GetAsync(url + "/GetById?id=" + id);
             if (response.IsSuccessStatusCode)
             {
