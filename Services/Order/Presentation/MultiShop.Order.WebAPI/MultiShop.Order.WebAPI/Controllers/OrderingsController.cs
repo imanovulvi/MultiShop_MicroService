@@ -5,10 +5,11 @@ using MultiShop.Order.Application.Features.Commands.Ordering.Create;
 using MultiShop.Order.Application.Features.Commands.Ordering.Remove;
 using MultiShop.Order.Application.Features.Commands.Ordering.Update;
 using MultiShop.Order.Application.Features.Queries.Ordering.GetAll;
+using MultiShop.Order.Application.Features.Queries.Ordering.GetByUserId;
 
 namespace MultiShop.Order.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderingsController : ControllerBase
     {
@@ -20,13 +21,18 @@ namespace MultiShop.Order.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
             var list = await mediator.Send(new GetAllOrderingQueryRequest());
             return Ok(list);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetByUserId(string userId)
+        {
+            var list = await mediator.Send(new GetByUserIdOrderingQueryRequest() {UserId=userId });
+            return Ok(list);
 
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateOrderingCommandRequest request)

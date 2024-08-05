@@ -2,6 +2,7 @@
 using MultiShop.DTOs.DTOs.Basket;
 using MultiShop.DTOs.DTOs.Discount;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Basket;
+using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.ViewComponents._ShoppingCartPartials
 {
@@ -16,7 +17,7 @@ namespace MultiShop.WebUI.ViewComponents._ShoppingCartPartials
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
+            
             if (TempData["Total"] ==null)
             {
                 BasketTotalDTO totaBasket = await basketService.GetBasketTotalAsync(urlBasket, HttpContext.Request.Cookies["AccesToken"]);
@@ -30,6 +31,7 @@ namespace MultiShop.WebUI.ViewComponents._ShoppingCartPartials
                         DiscountTotal = 0
                     };
                     TempData["Total"] = total;
+                    HttpContext.Response.Cookies.Append("BasketTotal", JsonConvert.SerializeObject(total));
                 }
             }
 

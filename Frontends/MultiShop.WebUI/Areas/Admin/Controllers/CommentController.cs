@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Comment;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
 
     public class CommentController : Controller

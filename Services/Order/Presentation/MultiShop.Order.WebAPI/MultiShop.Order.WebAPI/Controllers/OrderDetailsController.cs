@@ -8,7 +8,7 @@ using MultiShop.Order.Application.Features.Queries.OrderDetail.GetAll;
 
 namespace MultiShop.Order.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderDetailsController : ControllerBase
     {

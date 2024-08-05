@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Catalog.SpecialOffer;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class SpecialOfferController : Controller
     {

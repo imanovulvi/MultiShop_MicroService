@@ -13,6 +13,7 @@
         <div class="border-bottom pb-2">
             <div class="d-flex justify-content-between mb-3">
                 <h6>Subtotal</h6>
+     
                 <h6>$@((TempData["Total"] as ResultTotalDTO).Subtotal)</h6>
             </div>
             <div class="d-flex justify-content-between">
@@ -30,7 +31,7 @@
                 <h5>Discount Total</h5>
                 <h5>$@((TempData["Total"] as ResultTotalDTO).DiscountTotal)</h5>
             </div>
-            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+            <a href="/Order/Index" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</a>
         </div>
     </div>
 </div>

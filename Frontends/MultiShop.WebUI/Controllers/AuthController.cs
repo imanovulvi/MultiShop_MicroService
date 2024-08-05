@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MultiShop.DTOs.DTOs.Identity;
 using MultiShop.WebUI.AppClasses.Abstractions;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Security.Permissions;
 using System.Text;
 
 namespace MultiShop.WebUI.Controllers
@@ -51,7 +49,8 @@ namespace MultiShop.WebUI.Controllers
                     {
 
                         HttpOnly = true,
-                        Expires = DateTime.UtcNow.AddDays(1)
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        Secure=true
 
                     });
 

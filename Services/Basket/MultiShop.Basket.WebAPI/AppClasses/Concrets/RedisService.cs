@@ -29,10 +29,15 @@ namespace MultiShop.Basket.WebAPI.AppClasses.Concrets
             return await db.KeyDeleteAsync(key);
         }
 
-        public async Task<T> GetAsync<T>(string key)
+        public async Task<T> GetAsync<T>(string key) where T :class
         {
-         
-            return JsonConvert.DeserializeObject<T>(await db.StringGetAsync(key));
+           string value= await db.StringGetAsync(key);
+
+            if (value != null)
+            {
+                return JsonConvert.DeserializeObject<T>(value);
+            }
+            return null;
         }
 
         public async Task<bool> SetAsync<T>(string key, T value)

@@ -48,6 +48,7 @@ namespace MultiShop.WebUI.Controllers
             {
                 basketTotal = new BasketTotalDTO()
                 {
+                    UserId = "",
                     Baskets = new List<BasketDTO>
                     {
                         new BasketDTO()
@@ -58,7 +59,9 @@ namespace MultiShop.WebUI.Controllers
                     ProductName = product.Name,
                     Quantity = 1
 
+
                       }
+
                     }
                 };
             }
@@ -115,9 +118,12 @@ namespace MultiShop.WebUI.Controllers
                 };
 
                 total.DiscountTotal = total.Total - ((total.Total* discount.Rate)/100);
-                TempData["Total"] = JsonConvert.SerializeObject(total);
+                string jsonTotal= JsonConvert.SerializeObject(total);
+                TempData["Total"] = jsonTotal;
+                HttpContext.Response.Cookies.Append("BasketTotal", jsonTotal);
             }
             return Redirect("/ShoppingCart/Index");
         }
+
     }
 }

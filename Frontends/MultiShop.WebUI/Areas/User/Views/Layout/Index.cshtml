@@ -1,0 +1,71 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Spica Admin</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="~/UserTemplate/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="~/UserTemplate/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="~/UserTemplate/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="~/UserTemplate/images/favicon.png" />
+</head>
+
+<body>
+  <div class="container-scroller d-flex">
+    <!-- _sidebar -->
+        @await Component.InvokeAsync("_LayoutSidebarPartial")
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- _navbar -->
+            @await Component.InvokeAsync("_LayoutNavbarPartial")
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+              @RenderBody()
+            
+
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:~/UserTemplate/partials/_footer.html -->
+        <footer class="footer">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © MultiShop @DateTime.Now</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- base:js -->
+  <script src="~/UserTemplate/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="~/UserTemplate/js/off-canvas.js"></script>
+  <script src="~/UserTemplate/js/hoverable-collapse.js"></script>
+  <script src="~/UserTemplate/js/template.js"></script>
+  <!-- endinject -->
+  <!-- End custom js for this page-->
+</body>
+
+</html>

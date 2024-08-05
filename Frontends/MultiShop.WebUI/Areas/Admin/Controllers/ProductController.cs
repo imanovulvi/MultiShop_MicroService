@@ -15,7 +15,7 @@ using System.Text;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class ProductController : Controller
     {

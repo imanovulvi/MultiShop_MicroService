@@ -129,7 +129,7 @@ namespace MultiShop.Identity.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> UserInfo(Guid id)
+        public async Task<IActionResult> GetUserInfo(Guid id)
         {
 
             AppUser user = await context.Users.FindAsync(id);

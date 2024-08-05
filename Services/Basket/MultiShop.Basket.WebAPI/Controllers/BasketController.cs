@@ -32,7 +32,7 @@ namespace MultiShop.Basket.WebAPI.Controllers
         public async Task<IActionResult> Create(BasketTotalDTO basket)
         {
             Claim claim = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            await redisService.SetAsync<BasketTotalDTO>(claim.Value, basket);
+            await redisService.SetAsync(claim.Value, basket);
             return Ok("Elave olundu");
         }
 
