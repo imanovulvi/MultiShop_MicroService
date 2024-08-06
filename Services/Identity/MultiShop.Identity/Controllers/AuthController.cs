@@ -30,6 +30,15 @@ namespace MultiShop.Identity.Controllers
             this.configuration = configuration;
             this.context = context;
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await userManager.Users.ToListAsync());
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateAppUserDTO request) 
         {
@@ -144,5 +153,7 @@ namespace MultiShop.Identity.Controllers
 
             return Ok(userInfo);
         }
+
+       
     }
 }

@@ -1,17 +1,21 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MultiShop.WebUI.AppClasses.Abstractions;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Basket;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Cargo;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Catalog;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Comment;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Discount;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Identity;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Message;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Order;
 using MultiShop.WebUI.AppClasses.Concretes;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Basket;
+using MultiShop.WebUI.AppClasses.Concretes.Services.Cargo;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Catalog;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Comment;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Discount;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Identity;
+using MultiShop.WebUI.AppClasses.Concretes.Services.Message;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Order;
 
 namespace MultiShop.WebUI
@@ -43,7 +47,9 @@ namespace MultiShop.WebUI
             builder.Services.AddScoped(typeof(IAdressService), typeof(AdressService));
             builder.Services.AddScoped(typeof(IIdentityService), typeof(IdentityService));
 
-            builder.Services.AddScoped(typeof(IOrderingService), typeof(OrderingService));
+            builder.Services.AddScoped(typeof(IOrderingService), typeof(OrderingService));     
+            builder.Services.AddScoped(typeof(IMessageService), typeof(MessageService));
+            builder.Services.AddScoped(typeof(ICompanyService), typeof(CompanyService));
 
 
 

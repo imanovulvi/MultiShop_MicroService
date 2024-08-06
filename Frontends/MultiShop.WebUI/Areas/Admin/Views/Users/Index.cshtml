@@ -1,0 +1,56 @@
+﻿@model List<UserInfoDTO>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-md-12">
+    <div class="chart-box">
+        <h4>Category Table</h4>
+        <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
+        <div class="bs-example" data-example-id="bordered-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+
+                        <th>Email</th>
+                        <th>UserName</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model is not null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(++count)</th>
+                                <td>@item.Name</td>
+                                <td>@item.Surname</td>
+                                <td>@item.Email</td>
+                                <td>@item.UserName</td>
+
+
+                            </tr>
+                        }
+
+                    }
+
+
+
+
+                </tbody>
+            </table>
+      
+        </div>
+    </div>
+</div>
+

@@ -6,6 +6,8 @@ namespace MultiShop.WebUI.AppClasses.Concretes.Services.Identity
 {
     public class IdentityService:HttpClientService,IIdentityService
     {
+    
+
         public async Task<UserInfoDTO> GetUserInfoAsync(string url,string userId,string header=null)
         {
             if (header != null)

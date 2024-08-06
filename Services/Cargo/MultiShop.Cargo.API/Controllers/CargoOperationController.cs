@@ -19,7 +19,7 @@ namespace MultiShop.Cargo.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult Get()
         {
             var entity = manager.GetAll();
             List<GetCargoOperationDTO> dto = new List<GetCargoOperationDTO>();
@@ -90,7 +90,7 @@ namespace MultiShop.Cargo.API.Controllers
 
         }
         [HttpDelete]
-        public IActionResult Remove(int id)
+        public IActionResult Delete(int id)
         {
 
             manager.Delete(id);

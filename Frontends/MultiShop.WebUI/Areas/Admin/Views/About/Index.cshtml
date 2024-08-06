@@ -1,4 +1,5 @@
-﻿@model List<ResultAboutDTO>
+﻿
+@model List<ResultAboutDTO>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
@@ -16,7 +17,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Description</th>
-                        
+
                         <th>Adress</th>
                         <th>Email</th>
                         <th>PhoneNo</th>
@@ -34,7 +35,7 @@
                                 <th scope="row">@(++count)</th>
                                 <td>@item.Title</td>
                                 <td>@item.Description</td>
-                                <td>item.Adress</td>
+                                <td>@item.Adress</td>
                                 <td>@item.PhoneNo</td>
 
                                 <td><a href="/admin/About/Update?id=@item.Id" class="btn btn-primary">Update</a></td>

@@ -1,0 +1,50 @@
+﻿@model List<ResultMessageDTO>
+@{
+    ViewData["Title"] = "SenderMessage";
+    Layout = "~/Areas/User/Views/Layout/Index.cshtml";
+    int count = 1;
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic Table</h4>
+            <p class="card-description">
+                Add class <code>.table</code>
+            </p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>SenderId</th>
+                            <th>Subject</th>
+                            <th>MessageContent</th>
+                            <th>IsRead</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model is not null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(count++)</td>
+                                    <td>@item.SenderId</td>
+                                    <td>@item.Subject</td>
+                                    <td>@item.MessageContext</td>
+
+                                    <td>@item.IRead</td>
+                                    <td>@item.SendDate</td>
+                                    <td><a href="/user/Order/OrderDetails?id=@item.Id" class="btn btn-primary">Details</a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
