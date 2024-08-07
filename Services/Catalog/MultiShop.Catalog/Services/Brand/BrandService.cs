@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
 using MultiShop.Catalog.DTOs.Brand;
+using MultiShop.Catalog.Entitys;
 using MultiShop.Catalog.Settings;
 using ET = MultiShop.Catalog.Entitys;
 
@@ -18,7 +19,7 @@ namespace MultiShop.Catalog.Services.Brand
             this.brands = database.GetCollection<ET.Brand>(settings.BrandCollectionsName);
             this.mapper = mapper;
         }
-
+       
         public async Task CreateAsync(CreateBrandDTO brandDTO)
         {
             await brands.InsertOneAsync(mapper.Map<ET.Brand>(brandDTO));

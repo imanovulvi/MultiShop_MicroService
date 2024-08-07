@@ -15,6 +15,15 @@ namespace MultiShop.Discount.Controllers
         {
             this.discountService = discountService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DiscountCount()
+        {
+
+            return Ok(await discountService.DiscountCountAsync());
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll() 
         { 

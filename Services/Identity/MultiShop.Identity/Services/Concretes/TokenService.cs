@@ -19,6 +19,9 @@ namespace MultiShop.Identity.Services.Concretes
             this.configuration = configuration;
       
         }
+
+
+
         public string CreateAccessToken(List<Claim> claims, DateTime expire)
         {
 

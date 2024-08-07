@@ -1,0 +1,54 @@
+﻿@model ResultStatisticDTO
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="media-box">
+            <div class="media-icon pull-left"><i class="icon-bargraph"></i> </div>
+            <div class="media-info">
+                <h5>Brand count</h5>
+                <h3>@Model.BrandCount</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="media-box bg-sea">
+            <div class="media-icon pull-left"><i class="icon-wallet"></i> </div>
+            <div class="media-info">
+                <h5>Category count</h5>
+                <h3>@Model.CategoryCount</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="media-box bg-blue">
+            <div class="media-icon pull-left"><i class="icon-basket"></i> </div>
+            <div class="media-info">
+                <h5>Product count</h5>
+                <h3>@Model.ProductCount</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="media-box bg-green">
+            <div class="media-icon pull-left"><i class="icon-layers"></i> </div>
+            <div class="media-info">
+                <h5>Max Price Product</h5>
+                <h3>@Model.MaxPriceProductName</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <div class="media-box bg-green">
+            <div class="media-icon pull-left"><i class="icon-layers"></i> </div>
+            <div class="media-info">
+                <h5>Min Price Product</h5>
+                <h3>@Model.MinPriceProductName</h3>
+            </div>
+        </div>
+    </div>
+</div>
+

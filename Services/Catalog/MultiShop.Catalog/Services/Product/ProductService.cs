@@ -24,6 +24,9 @@ namespace MultiShop.Catalog.Services.Product
             this.mapper = mapper;
         }
 
+ 
+       
+
         public async Task CreateAsync(CreateProductDTO ProductDTO)
         {
             await products.InsertOneAsync(mapper.Map<ET.Product>(ProductDTO));

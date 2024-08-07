@@ -9,5 +9,7 @@ namespace MultiShop.Catalog.Services.Brand
         Task UpdateAsync(UpdateBrandDTO BrandDTO);
         Task DeleteAsync(string id);
         Task<GetByIdBrandDTO> GetByIdAsync(string id);
+
+  
     }
 }

@@ -1,4 +1,5 @@
-﻿using MultiShop.Discount.DTOs.Discount;
+﻿using Microsoft.AspNetCore.Mvc;
+using MultiShop.Discount.DTOs.Discount;
 
 namespace MultiShop.Discount.Services.Discount
 {
@@ -9,6 +10,7 @@ namespace MultiShop.Discount.Services.Discount
         Task<ResultDiscountDTO> GetByCodeAsync(string code);
         Task Update(UpdateDiscountDTO updateDiscount);
         Task DeleteAsync(int id);
-        Task CreateAsync(CreateDiscountDTO createDiscount); 
+        Task CreateAsync(CreateDiscountDTO createDiscount);
+        Task<int> DiscountCountAsync();
     }
 }

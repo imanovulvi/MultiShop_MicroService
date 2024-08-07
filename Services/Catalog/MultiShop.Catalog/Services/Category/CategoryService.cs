@@ -15,11 +15,13 @@ namespace MultiShop.Catalog.Services.Category
         public CategoryService(IMapper mapper,IDataBaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
+          
             var database = client.GetDatabase(settings.DataBaseName);
             this.categories=database.GetCollection<ET.Category>(settings.CategoryCollectionsName);
             this.mapper = mapper;
         }
 
+      
         public async Task CreateAsync(CreateCategoryDTO categoryDTO)
         {
            await categories.InsertOneAsync(mapper.Map<ET.Category>(categoryDTO));

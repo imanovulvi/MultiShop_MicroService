@@ -12,6 +12,13 @@ namespace MultiShop.Discount.Services.Discount
         {
             this.context = context;
         }
+        public async Task<int> DiscountCountAsync()
+        {
+            string query = "select count(*) from Discounts";
+           
+            return await context.CreateConnection().QuerySingleAsync<int>(query);
+        }
+
         public async Task CreateAsync(CreateDiscountDTO createDiscount)
         {
             string query = "insert into Discounts (Code,Rate,IsDelete,ValidDate) values (@code,@rate,@isDelete,@validDate)" ;

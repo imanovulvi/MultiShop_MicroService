@@ -38,8 +38,14 @@ namespace MultiShop.Identity.Controllers
             return Ok(await userManager.Users.ToListAsync());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UserCount()
+        {
+           return Ok(await userManager.Users.CountAsync());
+        }
 
-        [HttpPost]
+
+            [HttpPost]
         public async Task<IActionResult> CreateUser(CreateAppUserDTO request) 
         {
            

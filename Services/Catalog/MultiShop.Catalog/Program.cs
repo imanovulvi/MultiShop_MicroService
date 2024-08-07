@@ -13,6 +13,7 @@ using MultiShop.Catalog.Services.Image;
 using MultiShop.Catalog.Services.Product;
 using MultiShop.Catalog.Services.ProductDetails;
 using MultiShop.Catalog.Services.SpecialOffer;
+using MultiShop.Catalog.Services.Statistics;
 using MultiShop.Catalog.Settings;
 using System.Reflection;
 
@@ -39,6 +40,7 @@ namespace MultiShop.Catalog
             builder.Services.AddScoped(typeof(IBrandService), typeof(BrandService));
             builder.Services.AddScoped(typeof(IAboutService), typeof(AboutService));
             builder.Services.AddScoped(typeof(IContactService), typeof(ContactService));
+            builder.Services.AddScoped(typeof(IStatisticsService), typeof(StatisticsService));
        
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(configure => configure.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

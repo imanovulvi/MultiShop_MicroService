@@ -8,6 +8,7 @@ using MultiShop.WebUI.AppClasses.Abstractions.Services.Discount;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Identity;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Message;
 using MultiShop.WebUI.AppClasses.Abstractions.Services.Order;
+using MultiShop.WebUI.AppClasses.Abstractions.Services.Statistic;
 using MultiShop.WebUI.AppClasses.Concretes;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Basket;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Cargo;
@@ -17,6 +18,7 @@ using MultiShop.WebUI.AppClasses.Concretes.Services.Discount;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Identity;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Message;
 using MultiShop.WebUI.AppClasses.Concretes.Services.Order;
+using MultiShop.WebUI.AppClasses.Concretes.Services.Statistic;
 
 namespace MultiShop.WebUI
 {
@@ -50,6 +52,7 @@ namespace MultiShop.WebUI
             builder.Services.AddScoped(typeof(IOrderingService), typeof(OrderingService));     
             builder.Services.AddScoped(typeof(IMessageService), typeof(MessageService));
             builder.Services.AddScoped(typeof(ICompanyService), typeof(CompanyService));
+            builder.Services.AddScoped(typeof(IStatisticService), typeof(StatisticService));
 
 
 
