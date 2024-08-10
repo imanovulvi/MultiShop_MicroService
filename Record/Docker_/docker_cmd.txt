@@ -1,0 +1,83 @@
+terminal command
+cd "papka adi" [papkaya getmek]
+cd.. [bir evvelki papkaya getmek]
+mkdir "papka name" [yeni papka acmaq]
+dir || ls  [oldugun directoride olan file listelemek]
+ls -ll [oldugun directoride olan file data etrafli listelemek]
+echo "yazilacaq metn" > test.txt [file duzeltmek]
+pwd [oldugun yolu gosterir]
+cat || get-content [cat linux tabanli ve windows powershell istifade olunur,get-content y]
+
+
+------------------
+Docker --help
+
+---------------
+docker login [docker hub image pull etmek ucun dockehub login parolunuzdan istifade etmek lazimdir ].
+docker logout [cixis ucun]
+
+
+------------------------
+[Image]
+docker image || docker image --help [image aid commandlari getirir]
+docker pull "imagename" [docker hub hovuzundan her hansi bir image yuklemek ucun istifadeolunur]
+docker image ls [image listelemeye yarar]
+docker images [image listelemeye yarar]
+docker image rm "imagename ve ya image id"  [image silmeye yarar]
+docker build -t myproje:v1 . || docker image build -t myproje:v1 . [dockerfile image halina salmaq ucun istifade olunur. -t tagname sayilir -t sonra image name yaziriq ve axirdaki . isaresi powershellin oldugu klasoru gosterir]
+
+-------------------
+[Container]
+docker container || docker container --help [containera aid commandlari getirir]
+
+docker run nginx || docker container run nginx [her hansi bir imageden container qaldirmaq ucun istifade olunur.eger image varsa ondan yoxsa image ilk novbede pull edib containeri qaldircaq]
+docker run --name "container_name" nginx [--name atributu containra ad vermek ucun istifade olunur]
+docker run --name "container_name" -d nginx  [burad -d atributu detach(ayirir) etmek.Container qurasdiranda -d atributu istifade edilmeyende containiri qurasdirir amma aktiv etmir. -d atributu bunu eksidir ]
+docker run --name "container_name" -d  -p 8080:80 nginx [-p ile port bildirmek olar]
+
+docker stop "container adi ve ya id" || docker container start "container adi ve ya id" [containiri dayandirmaq]
+docker start "container adi ve ya id" || docker container stop "container adi ve ya id" [containiri baslatmaq]
+
+docker container ls || ps [isleyen container listelemeye yarar]
+docker container ls -a || ps -a[butun container listelemeye yarar]
+docker ps [isleyen container listelemeye yarar]
+docker ps -a [butun container listelemeye yarar]
+docker container rm "conatiner name ve ya id" || docker rm "conatiner name ve ya id" [container silmek]
+docker container rm "conatiner name ve ya id" -f [-f calisan containir zorluyaraq silmek]
+docker logs "container adi ve ya id" || [container loglarina baxmaq]
+
+docker exec -it "container name ve ya id" bash [her hansi bir containere daxil olmaq ucun istifade olunur -it interaktiv demekdir bash (sh bezi linux surumlerinde shell terminalidir ) ise linux uzerinde olan terminali ayaga qaldirmaqdir] 
+exit [cixmaq]
+
+
+----------------------------------------
+[Volume]
+docker volume create "volume name" [yeni bir volume olusdurma]
+docker run --name c_MultiShopDiscount -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Ulvi6257501*" -v /path/to/your/local/dir:/var/opt/mssql -p 1434:1433 -d 994123c66ce4ddceaf05556a7c841fa60d63b8e65d8eead5deff2dae795b78e2 [-v ile hansi valumeni kullansin onu gosteririk
+ ve ya silinen container valume uzerinde yeniden ayaga qaldirmak ucun bu kodu istifade ede bilersi]
+
+docker volume rm "volume name" [volumeni silmek ucun]
+docker volume ls [var olan volumeleri listelemek ucun]
+
+
+-------------------------isleye
+docker cp container_name_or_id:/usr/share/nginx/html/test.txt C:\Users\test  [docker contairdan hosta file copyalamaq]
+
+docker cp C:\Users\test\publish\ container_name_or_id:/usr/share/nginx/html  [Hostdan docker containira kopyalamaq]
+------------------------
+
+
+[Dockerfile]
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 [lazim olan linux image istifade edir (image varsa ondan yoxsa hub yuleryir) ve bu imagen icinde core projesini run etmek ucun mueyyen proqramlar var IIS ve ya kestrel ]
+
+WORKDIR /app [image icinde app papka acir]
+COPY  /bin/Release/net8.0/publish .  [hostumda olan .net core proje publish kopyalayir .(o demekdirki oldugum papkaya) linux icindeki app papkasina atir]
+ENTRYPOINT ["dotnet", "test.dll"]  [containira request gelende bu dll islet]
+docker build -t myproje:v1 . [qeyd bu Dockerfile image halina getirmek ucun istifade olunur.sonra bu imageden contaner hazirlanir]
+
+[docker-compose]
+docker-compose up -d [compose file calisdirmaq ucu]
+docker-compose -f /path/to/your/docker-compose.yml up -d  [-f file demek.compose diger directorilerden catmaq ]
+docker-compose down [silmek ucun]
+docker-compose -f /path/to/your/docker-compose.yml down  [-f file demek.compose diger directorilerden catmaq]
+

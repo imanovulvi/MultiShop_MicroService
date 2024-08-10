@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  s_nginx:
+    container_name: c_nginx
+    image: nginx
+    ports:
+      - 8080:80
+      - 8081:80
+
+  webapp:
+    image: i_core
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8085:8080
+      
+      
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - v_app:/app
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+volumes:
+  mssql_data:
+  v_app:
+
+
