@@ -1,0 +1,9 @@
+Cors policy - Cors politikasi
+Frontend yazilmis client proqrami eger browserin anladigi emal etdiyi script dillerinde (javascript ve ya javascript kitabxanalarinda olan jqeury ,Angular ve s)
+yazilmis bir proqramdirsa bu scriptlerle  biz diger endpointlere request gondere bilmerik.
+Yeni browserler gonderilen requestlerin endpointlerinde baxir protokul ,hosting ve portu her hansi biri ferqlidise 
+onda browser request etmeyimize icaze vermir. Bu qaydaya Some origin policy  (bezi mene siyaseti) deyilir.
+Eger protokol hosting ve port uygundursa browser request etmeye icazeni veriri.
+Bele bir sual vere bilersiniz .Biz neye gore oz proyektlerimizde jquery ile request gondere bilirik cunki eyni endpoint altinda isleyirik.
+Yaxsi be eger biz browser tabanli scriplerle yox core mvc proyektinde her hansi bir endpointe sorgu neye gore gondere bilirik?
+Ona gore ki Cors politikasi deyilen anlayis browser engenleyir ve ona gore engelleye bilirki javascript tipli script dilleri browser ozu emal ede bilir yeni server terefli islemir client terefinde isleyir.

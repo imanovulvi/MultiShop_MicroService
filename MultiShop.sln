@@ -65,7 +65,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.Message", "Servic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RapidAPI", "RapidAPI", "{756E9FCB-9F53-437C-8A50-11AF79471595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.RapidAPI.WebApp", "RapidAPI\MultiShop.RapidAPI.WebApp\MultiShop.RapidAPI.WebApp.csproj", "{9750F77C-17F2-4078-A8B1-13C8993CFFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.RapidAPI.WebApp", "RapidAPI\MultiShop.RapidAPI.WebApp\MultiShop.RapidAPI.WebApp.csproj", "{9750F77C-17F2-4078-A8B1-13C8993CFFE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Record", "Record", "{00CE41F7-AE84-4B70-9B65-B583CE46CF24}"
+	ProjectSection(SolutionItems) = preProject
+		CorsPolicy.txt = CorsPolicy.txt
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{FA886B74-21C1-48A3-9E6D-F549DEA520F4}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\test\docker-com\docker-compose.yml = ..\..\..\..\test\docker-com\docker-compose.yml
+		..\..\..\..\test\docker-com\Dockerfile = ..\..\..\..\test\docker-com\Dockerfile
+		..\..\..\OneDrive\İş masası\Readme.txt = ..\..\..\OneDrive\İş masası\Readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +192,7 @@ Global
 		{23877704-79F7-4BE7-A450-A32A9C05E4CF} = {45CE67EC-2920-488E-B214-1901C49139EF}
 		{7481EEB2-1A95-426D-99DB-CC841BD3DCC7} = {23877704-79F7-4BE7-A450-A32A9C05E4CF}
 		{9750F77C-17F2-4078-A8B1-13C8993CFFE3} = {756E9FCB-9F53-437C-8A50-11AF79471595}
+		{FA886B74-21C1-48A3-9E6D-F549DEA520F4} = {00CE41F7-AE84-4B70-9B65-B583CE46CF24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {622638EC-D013-4BC3-B41F-632A9EB97549}
