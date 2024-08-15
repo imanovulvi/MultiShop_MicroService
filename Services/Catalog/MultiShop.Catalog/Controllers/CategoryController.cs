@@ -20,6 +20,9 @@ namespace MultiShop.Catalog.Controllers
             this.mapper = mapper;
             this.category = category;
         }
+
+       
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
